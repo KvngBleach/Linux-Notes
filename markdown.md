@@ -22,27 +22,27 @@ Key Features of APT:
  
   * Cache Management: APT maintains a local cache of package information. This cache helps in faster package searches and updates. Users can update this cache using the apt-get update command.
 
-### Basic commands in APT:
+ Basic commands in APT:
 
 Installing a package:
 
-        sudo apt-get install package-name
+    sudo apt-get install package-name
 
 Updating the package list:
 
-        sudo apt-get update
+     sudo apt-get update
         
 Upgrading packages:
 
-        sudo apt-get upgrade
+    sudo apt-get upgrade
         
 Removing a package:
 
-        sudo apt-get remove package-name
+    sudo apt-get remove package-name
       
 Searching for packages:
 
-        apt-cache search package-name
+     apt-cache search package-name
 
 ## YUM (Yellowdog Updater, Modified):
 
@@ -103,4 +103,54 @@ Key Features of Pacman:
 * User-Managed Configuration: Pacman gives users significant control over their system's configuration files. It provides options to save, overwrite, or merge configuration files during package upgrades, ensuring that the system stays tailored to the user's preferences.
 
 * AUR Support: The Arch User Repository (AUR) is a community-driven repository for additional software not available in the official repositories. Pacman can be extended to manage packages from the AUR with AUR helpers like yay.
+
+Basic commands in Pacman:
+
+Installing a package:
+
+    sudo pacman -S package-name
+    
+Updating the package list and upgrading packages:
+
+    sudo pacman -Syu\
+    
+Removing a package:
+
+    sudo pacman -R package-name
+    
+Querying package information:
+
+    pacman -Q package-name
+
+## Zypper:
+
+</table> Zypper is the default package manager used in openSUSE and its derivatives. It plays a critical role in managing software packages on these Linux distributions. Zypper is known for its efficiency and robust dependency resolution capabilities. In this section, we will delve into Zypper, its commands, and provide examples of its usage.
+
+Key Features of Zypper
+
+* Dependency Resolution: Zypper is highly effective at handling dependencies. It automatically detects and resolves package dependencies, ensuring that all required components are installed, which is crucial for software to function correctly.
+
+* Repository Management: Zypper interacts with software repositories, making it easy to fetch and install packages. openSUSE provides a wide range of official and community repositories, giving users access to a vast selection of software.
+
+* Package Management: Zypper offers a range of package management commands, including installation, upgrading, downgrading, and removal. It provides users with control over their software packages.
+
+* Transaction Safety: Zypper is designed with a focus on transaction safety. This means it will attempt to maintain a consistent system state by either completing a transaction successfully or rolling back changes in the event of an error, avoiding a partially updated system.
+
+Basic commands in Zypper:
+
+Installing a package:
+
+    sudo zypper in package-name
+
+Updating packages:
+
+    sudo zypper up
+
+Removing a package:
+
+    sudo zypper rm package-name
+    
+Searching for packages:
+
+    zypper se package-name
 
