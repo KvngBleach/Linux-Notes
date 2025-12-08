@@ -154,3 +154,16 @@ Searching for packages:
 
     zypper se package-name
 
+## DPKG (Debian Package Manager):
+
+</table> DPKG (Debian Package Manager) is a fundamental package management tool for Debian-based Linux distributions, including Debian itself, Ubuntu, and their derivatives. DPKG is a low-level package manager, and while it directly interacts with individual package files, it is often used in conjunction with higher-level package managers like APT for a more user-friendly experience. In this section, we'll explore DPKG, its commands, and provide examples of its usage.
+
+Key Features of DPKG: 
+
+* Low-Level Package Management: DPKG directly handles the installation, removal, and management of individual package files (with the .deb extension). It does not automatically resolve or manage dependencies like higher-level package managers such as APT.
+
+* Package Installation: DPKG is responsible for installing software packages on a Debian-based system. Users can install packages from local .deb files or by specifying package names if the packages are already present on the system.
+
+* Package Removal: DPKG can remove installed packages from the system, ensuring that configuration files are retained or purged based on user preferences.
+
+* Package Querying: Users can query the status and information about installed packages, which is useful for diagnosing issues or verifying package details.
