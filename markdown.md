@@ -75,3 +75,32 @@ Upgrading packages:
 Removing a package:
 
     sudo yum remove package-name
+
+## dnf Package Manager
+
+</table> dnf is the successor to YUM and is now the recommended package manager for Fedora-based distributions. It provides a more modern and user-friendly experience. The syntax and commands for dnf are similar to yum.
+
+Some dnf examples are:
+
+Installing a package:
+
+    sudo dnf install package-name
+    
+Updating packages:
+
+    sudo dnf upgrade
+
+## Pacman
+
+</table> Pacman is the package manager used in Arch Linux and its derivatives, such as Manjaro. Arch Linux is known for its simplicity, flexibility, and rolling-release model, and Pacman is a vital component that makes managing software on Arch-based systems efficient. In this section, we'll explore Pacman, its commands, and provide examples of its usage.
+
+Key Features of Pacman:
+
+* Simplicity and Transparency: Pacman follows a simple and transparent approach to package management. It doesn't hide the details and allows users to understand precisely what's happening during package installation, upgrade, and removal.
+
+* Rolling Release: Arch Linux and its derivatives use a rolling-release model, meaning that software is continuously updated rather than waiting for major distribution releases. Pacman plays a crucial role in keeping the system up-to-date with the latest software versions.
+
+* User-Managed Configuration: Pacman gives users significant control over their system's configuration files. It provides options to save, overwrite, or merge configuration files during package upgrades, ensuring that the system stays tailored to the user's preferences.
+
+* AUR Support: The Arch User Repository (AUR) is a community-driven repository for additional software not available in the official repositories. Pacman can be extended to manage packages from the AUR with AUR helpers like yay.
+
