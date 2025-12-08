@@ -167,3 +167,31 @@ Key Features of DPKG:
 * Package Removal: DPKG can remove installed packages from the system, ensuring that configuration files are retained or purged based on user preferences.
 
 * Package Querying: Users can query the status and information about installed packages, which is useful for diagnosing issues or verifying package details.
+
+Basic commands in DPKG: 
+
+Installing a package from a .deb file:
+
+    sudo dpkg -i package.deb
+    
+Removing a package:
+
+    sudo dpkg -r package-name
+    
+Querying package information:
+
+    dpkg -l | grep package-name
+
+## systemctl in Linux
+
+</table> In this article, we will explore the systemctl command, an essential tool for managing services, units, and the entire systemd ecosystem in Linux. We must also know about systemd in Linux.
+
+What is systemd?
+
+</table> Systemd is a system and service manager for Linux operating systems. It is designed to replace traditional init systems like SysV init and Upstart and is responsible for initializing the system, starting services, managing daemons, and monitoring system state. Its approach to managing processes is both efficient and powerful. 
+
+* Parallel startup of services, which accelerates the boot process.
+* Dependency management, ensuring that services are started in the right order.
+* Cgroups integration for resource management.
+* Enhanced logging through the journal system.
+* Socket activation, which allows services to be started on-demand.
