@@ -43,3 +43,35 @@ Removing a package:
 Searching for packages:
 
         apt-cache search package-name
+
+## YUM (Yellowdog Updater, Modified):
+
+</table> YUM (Yellowdog Updater, Modified) is a package manager primarily used in Red Hat-based Linux distributions such as CentOS, Fedora, and RHEL (Red Hat Enterprise Linux). YUM has played a significant role in simplifying package management on these systems, although it's important to note that in recent years, dnf (Dandified YUM) has become the modern and recommended replacement for YUM. Here, we will discuss YUM, its commands, and provide examples of its usage.
+
+Key Features of YUM:
+
+* Dependency Resolution: YUM, like APT, is adept at handling complex dependency resolution. It automatically identifies and installs any necessary dependencies for the packages you want to install, ensuring that your software functions correctly.
+
+* Repository Management: YUM interacts with software repositories to fetch and install packages. Users can configure these repositories to obtain software from both official sources and trusted third-party repositories.
+
+* Package Management: YUM provides a set of commands to manage packages on the system. This includes installing, updating, downgrading, and removing packages, as well as listing installed packages and their information.
+
+* Cache Management: YUM maintains a local cache of metadata from the repositories. This cache improves package search and installation speed. You can update this cache using the yum makecache command.
+
+### Basic commands in YUM:
+
+Installing a package:
+
+    sudo yum install package-name
+    
+Updating the package list:
+
+    sudo yum makecache
+    
+Upgrading packages:
+
+    sudo yum update
+    
+Removing a package:
+
+    sudo yum remove package-name
