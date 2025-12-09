@@ -195,3 +195,48 @@ What is systemd?
 * Cgroups integration for resource management.
 * Enhanced logging through the journal system.
 * Socket activation, which allows services to be started on-demand.
+
+## Introduction to systemctl
+</table> systemctl is the primary command-line interface for interacting with systemd. It provides a wide range of functions for managing services, viewing their status, and controlling the system's behavior. Let's explore some of the most common systemctl commands and their usage.
+
+## Basic systemctl Commands
+
+### Starting and Stopping Services
+To start a service, you use the start command. For example, to start the Apache web server:
+
+    sudo systemctl start apache2
+
+To stop a service, use the stop command:
+
+    sudo systemctl stop apache2
+
+### Enabling and Disabling Services
+
+To ensure a service starts at boot, you enable it using the enable command:
+
+    sudo systemctl enable apache2
+
+To disable a service from starting at boot:
+
+    sudo systemctl disable apache2
+
+### Restarting and Reloading Services
+
+To restart a service:
+
+    sudo systemctl restart apache2
+    
+To reload configuration files without stopping the service:
+
+    sudo systemctl reload apache2
+
+### Checking Service Status
+To view the status of a service, use the status command:
+
+    systemctl status apache2
+
+### Viewing Active Units
+You can list all currently active units (services, sockets, targets, etc.) with:
+
+    systemctl list-units --type=service
+
