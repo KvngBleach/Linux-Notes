@@ -240,3 +240,28 @@ You can list all currently active units (services, sockets, targets, etc.) with:
 
     systemctl list-units --type=service
 
+# Linux File Hierarchy Structure
+
+</table> The Linux File Hierarchy Structure or the Filesystem Hierarchy Standard (FHS) defines the directory structure and directory contents in Unix-like operating systems. It is maintained by the Linux Foundation. 
+
+* In the FHS, all files and directories appear under the root directory /, even if they are stored on different physical or virtual devices.
+* Some of these directories only exist on a particular system if certain subsystems, such as the X Window System, are installed.
+* Most of these directories exist in all UNIX operating systems and are generally used in much the same way; however, the descriptions here are those used specifically for the FHS and are not considered authoritative for platforms other than Linux.
+
+## Root 
+
+</table> At the top of every Linux file system is the root directory represented by a forward slash /. It’s the base point, and no directory exists above it. If you look at the file system graphically, you’ll see all other directories branching from this root directory.
+
+* Every single file and directory start from the root directory.
+* The only root user has the right to write under this directory.
+* /root is the root user’s home directory, which is not the same as /
+
+</table> Only the root user has permission to modify contents inside this directory. Regular users cannot make changes here. For example, if you attempt to create a file in / as a non-root user, you’ll encounter a "Permission Denied" error.
+
+## Bin
+
+</table> The /bin directory contains essential commands and binaries needed by all users, including cp, ls, ssh, and kill. These commands are universally available across user types.
+
+* Contains binary executables.
+* Common linux commands you need to use in single-user modes are located under this directory.
+* Commands used by all the users of the system are located here e.g. ps, ls, ping, grep, cp 
