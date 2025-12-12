@@ -334,3 +334,26 @@ Site-specific data served by this system, such as data and scripts for web serve
 * srv stands for service.
 * Contains server specific services related data.
 * Example, /srv/cvs contains CVS related data.
+
+## /tmp : 
+Programs create temporary files during execution, and these are stored in /tmp. These files are deleted automatically after the program finishes or when the system is restarted.
+
+* Directory that contains temporary files created by system and users.
+* Files under this directory are deleted when the system is rebooted.
+
+## /usr : 
+Secondary hierarchy for read-only user data; contains the majority of (multi-)user utilities and applications. 
+
+* Contains binaries, libraries, documentation, and source-code for second level programs.
+* /usr/bin contains binary files for user programs. If you can’t find a user binary under /bin, look under /usr/bin. For example: at, awk, cc, less, scp
+* /usr/sbin contains binary files for system administrators. If you can’t find a system binary under /sbin, look under /usr/sbin. For example: atd, cron, sshd, useradd, userdel
+* /usr/lib contains libraries for /usr/bin and /usr/sbin
+* /usr/local contains user's programs that you install from source. For example, when you install apache from source, it goes under /usr/local/apache2
+* /usr/src holds the Linux kernel sources, header-files and documentation.
+
+## /proc:
+The /proc directory provides detailed information about system processes. Each process is assigned a unique ID and represented as a directory inside /proc. For example, /proc/meminfo gives real-time data about memory usage including total, free, buffer, and cache statistics.
+
+* Contains information about system process.
+* This is a pseudo filesystem that contains information about running processes. For example: /proc/{pid} directory contains information about the process with that particular pid.
+* This is a virtual filesystem with text information about system resources. For example: /proc/uptime
