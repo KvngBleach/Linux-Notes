@@ -265,3 +265,72 @@ You can list all currently active units (services, sockets, targets, etc.) with:
 * Contains binary executables.
 * Common linux commands you need to use in single-user modes are located under this directory.
 * Commands used by all the users of the system are located here e.g. ps, ls, ping, grep, cp 
+
+## Boot
+
+</table> This directory stores all files required for booting the system. It includes the GRUB bootloader configuration and essential kernel files that are loaded during startup. 
+
+* This directory stores all files required for booting the system. It includes the GRUB bootloader configuration and essential kernel files that are loaded during startup.
+* Example: initrd.img-2.6.32-24-generic, vmlinuz-2.6.32-24-generic
+
+## Dev
+
+</table> `Device files in Linux are stored in the /dev directory. These are special files that act as interfaces between hardware and software. Device files are of two types: block devices (e.g., hard drives) and character devices (e.g., microphones and speakers). Examples include /dev/sda1 for disk partitions.
+
+* These include terminal devices, usb, or any device attached to the system.
+* Example: /dev/tty1, /dev/usbmon0
+
+## Etc 
+
+</table> Short for "Editable Text Configuration," /etc contains configuration files for system applications, users, services, and tools or it contains the Host-specific system-wide configuration files. For example, user details like UID and local addresses are defined here.
+
+* This also contains startup and shutdown shell scripts used to start/stop individual programs.
+* Example: /etc/resolv.conf, /etc/logrotate.conf.
+
+## Home 
+
+</table> Every non-root user has a personal directory inside /home. For example, if your username is anshu, your personal directory would be /home/anshu. Each user can create, delete, or modify files only in their own home directory and cannot access others’ home directories.
+
+* Home directories for all users to store their personal files, containing saved files, personal settings, etc..
+* example: /home/kishlay, /home/kv
+
+## Lib 
+
+</table> Applications require shared libraries to run, which are stored in /lib. These include dynamic libraries needed during runtime. For example, Apache server libraries are available here.
+
+* Library filenames are either ld* or lib*.so.*
+* Example: ld-2.11.1.so, libncurses.so.5.7
+
+## Media
+
+</table> Devices like USBs, CDs, and pen drives are mounted under /media. For example, when a CD-ROM is inserted (appeared in FHS-2.3), its details will appear here.
+
+* Temporary mount directory for removable devices.
+* Examples, /media/cdrom for CD-ROM; /media/floppy for floppy drives; /media/cdrecorder for CD writer
+
+## MnT
+
+* When external drives are connected, they are temporarily mounted in /mnt. This is where their contents become accessible to the system.
+* Temporary mount directory where sysadmins can mount filesystems.
+
+## /opt : 
+Third-party software and packages not part of the default system installation are stored in /opt. It includes their configuration and data files.
+
+* Contains add-on applications from individual vendors.
+* Add-on applications should be installed under either /opt/ or /opt/ sub-directory.
+
+## /sbin : 
+Essential system binaries, e.g.,
+
+This directory holds administrative binaries like iptables, firewall management tools, fsck, init, route etc. These binaries are primarily for system administrators and typically require root privileges to execute.
+
+* Just like /bin, /sbin also contains binary executables.
+* The linux commands located under this directory are used typically by system administrators, for system maintenance purposes.
+* Example: iptables, reboot, fdisk, ifconfig, swapon
+
+## /srv : 
+Site-specific data served by this system, such as data and scripts for web servers, data offered by FTP servers, and repositories for version control systems.
+
+* srv stands for service.
+* Contains server specific services related data.
+* Example, /srv/cvs contains CVS related data.
