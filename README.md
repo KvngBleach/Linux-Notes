@@ -93,9 +93,9 @@ If you are familiar with languages like Python or C, you will find shell scripti
 
 It is quite frustrating, so why not we can have a utility where we just have to type the name of directory and we can directly jump to that without executing the "cd ../" command again and again. Save the script as "jump.sh"
 
-# !/bin/bash
+## !/bin/bash
 
-# A simple bash script to move up to desired directory level directly
+ A simple bash script to move up to desired directory level directly
 
 function jump()
 {
