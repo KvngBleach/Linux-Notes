@@ -136,6 +136,18 @@ function jump()
             cd $cwd
             break
         fi
-    done
-}
+    done}
 
+For now, we cannot execute our shell script because it does not have permissions. We have to make it executable by typing following command –
+
+    $ chmod +x path/to/our/file/jump.sh
+Now to make this available on every terminal session, we have to put this in ".bashrc" file.
+
+".bashrc" is a shell script that Bash shell runs whenever it is started interactively. The purpose of a .bashrc file is to provide a place where you can set up variables, functions, and aliases, define our prompt, and define other settings that we want to use whenever we open a new terminal window.
+
+Now open the terminal and type the following command:
+
+    $ echo “source ~/path/to/our/file/jump.sh”>> ~/.bashrc
+Now open your terminal and try out new "jump" functionality by typing following command-
+
+    $ jump dir_name
