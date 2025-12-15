@@ -77,3 +77,65 @@ Shell scripts help automate important tasks like checking system health, setting
 
 6. Lightweight and Easy to Write
 They are interpreted, so there is no compile step. You can write a useful script in minutes, and test it instantly perfect for quick fixes and small tasks.
+
+## Understanding Shell Scripts: Structure, Syntax, and Usage
+
+Shells are interactive, meaning they take user input and execute commands. But typing multiple commands repeatedly is inefficient.
+
+Instead, you can store commands in a file a shell script and run them when needed. These scripts are similar to Windows batch files and typically have a .sh extension.
+
+If you are familiar with languages like Python or C, you will find shell scripting easy to grasp. A shell script includes:
+
+* Shell Keywords: if, else, break, etc.
+* Shell Commands: cd, ls, echo, pwd, touch, etc.
+* Functions
+* Control Flow: if..then..else, case, loops, etc.
+
+It is quite frustrating, so why not we can have a utility where we just have to type the name of directory and we can directly jump to that without executing the "cd ../" command again and again. Save the script as "jump.sh"
+
+# !/bin/bash
+
+# A simple bash script to move up to desired directory level directly
+
+function jump()
+{
+    # original value of Internal Field Separator
+    OLDIFS=$IFS
+
+    # setting field separator to "/"
+    IFS=/
+
+    # converting working path into array of directories in path
+    # eg. /my/path/is/like/this
+    # into [, my, path, is, like, this]
+    path_arr=($PWD)
+
+    # setting IFS to original value
+    IFS=$OLDIFS
+
+    local pos=-1
+
+    # ${path_arr[@]} gives all the values in path_arr
+    for dir in "${path_arr[@]}"
+    do
+        # find the number of directories to move up to
+        # reach at target directory
+        pos=$[$pos+1]
+        if [ "$1" = "$dir" ];then
+
+            # length of the path_arr
+            dir_in_path=${#path_arr[@]}
+
+            #current working directory
+            cwd=$PWD
+            limit=$[$dir_in_path-$pos-1]
+            for ((i=0; i<limit; i++))
+            do
+                cwd=$cwd/..
+            done
+            cd $cwd
+            break
+        fi
+    done
+}
+
