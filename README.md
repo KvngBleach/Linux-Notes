@@ -151,3 +151,6 @@ Now open the terminal and type the following command:
 Now open your terminal and try out new "jump" functionality by typing following command-
 
     $ jump dir_name
+
+
+# Linux+ (V8) exam objectives summary
