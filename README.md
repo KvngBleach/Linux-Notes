@@ -1,60 +1,33 @@
 # Introduction to Linux Shell and Shell Scripting
 
-## Distributions and Lifecycles
+## The Basic Boot Process
+You are expected to understand the sequence of events from power-on to the login prompt.
 
-You need to distinguish between the various "flavors" of Linux and how they are maintained.
+* Bootloader: The software that starts the OS (e.g., GRUB2, LILO, Syslinux).
+* Configuration: You must know where the config files live (e.g., /etc/default/grub and /boot/grub/grub.cfg).
+* Kernel: The heart of the OS. You need to know how to pass Kernel Parameters at boot (like quiet, nomodeset, or root=).
+* Initial RAM Disk (initrd/initramfs): A temporary file system that loads the drivers necessary to mount the real root file system.
+* PXE (Preboot Execution Environment): Understanding how systems boot over a network, common in data centers and "diskless" setups.
 
-* Distribution Families: Understanding the differences between Debian-based (Ubuntu, Kali), RHEL-based (Fedora, AlmaLinux, Rocky), and SUSE-based systems.
-* Software Repositories: Knowing the role of stable vs. testing/unstable repos.
-* Maintenance Cycles: * LTS (Long-Term Support): Focused on enterprise stability (usually 5–10 years of updates).
-* Rolling Release: Focused on the "bleeding edge" (updates are constant, no major version jumps).
-* End of Life (EOL): Managing the risks when a version no longer receives security patches.
+## Filesystem Hierarchy Standard (FHS)
 
-## Kernel Components and Modules
+Directory	Purpose
+/bin & /sbin	Essential binaries (commands) and system binaries for the root user.
+/etc	Configuration files for the system and applications.
+/proc & /sys	Virtual file systems containing Kernel and process information.
+/var	Variable data: Logs (/var/log), mail, and spool files.
+/usr	User programs, libraries, and documentation.
+/boot	Files needed to start the boot process (Kernel images, GRUB).
 
-The kernel is the heart of the OS. You must understand how it interacts with hardware and how to tweak it without a full reboot.
+## Server Architectures
 
-* Kernel Roles: Managing memory, CPU scheduling, and hardware abstraction.
-* Kernel Modules: Using tools like lsmod, insmod, modprobe, and rmmod to add or remove drivers on the fly.
-* Parameters: Understanding how /proc/sys/ and sysctl allow you to modify kernel behavior at runtime.
+Modern Linux admins deal with more than just standard PCs. You must recognize these architectures:
 
-## The Boot Process
+* x86_64 / AMD64: The standard 64-bit desktop and server architecture.
+* AArch64 (ARM64): Common in cloud instances (like AWS Graviton) and Raspberry Pis.
+* RISC-V: The emerging open-source instruction set architecture.
 
-You are expected to know exactly what happens from the moment you hit the power button until you see a login prompt.
+## Distributions and Licensing
 
-* Hardware Initialization: BIOS vs. UEFI.
-* Bootloaders: Primarily GRUB2. You should know how to navigate the GRUB menu and pass temporary parameters to the kernel (like booting into single-user mode).
-* Init Systems: While systemd is the modern standard (Targets, Units, and Services), you still need a passing familiarity with the legacy SysVinit (Runlevels).
-* The Initial RAM Disk: The role of initramfs or initrd in loading necessary drivers to mount the root file system.
-
-# Comparison Table: Common Distro Families
-
-Feature	Debian / Ubuntu	RHEL / Fedora / Rocky
-Package Manager -	apt / dpkg	dnf / rpm
-Package Format -	.deb	.rpm
-Init System	- systemd	systemd
-Enterprise Focus	General Purpose / Cloud	Corporate / High-Security
-
-## Breakdown of Domain 1.2: System Access and Interaction
-
-1. Remote Access Protocols and Tools
-
-* SSH (Secure Shell): The gold standard. You need to understand:
-     Public Key Authentication: Using ssh-keygen, ssh-copy-id, and the authorized_keys file.
-     Port Forwarding/Tunneling: Securely routing traffic through an SSH connection.
-* Console Access: Understanding TTY (Teletype) and PTS (Pseudo Terminal Slave) sessions.
-* VNC and RDP: Methods for remote graphical access (though less common in pure server administration).
-
-2. The Command Line Interface (CLI)
-
-You are expected to understand the environment in which you type your commands.
-
-* Shell Types: Primarily Bash (the default), but also awareness of Zsh (popular in macOS/modern distros) and Fish.
-* Shell Configuration: Knowing which files load when you log in:
-
-/etc/profile (Global)
-
-~/.bash_profile or ~/.bashrc (User-specific)
-
-* Environment Variables: Using export, env, and understanding $PATH (where the system looks for executable programs).
-
+* Distribution Families: Distinguishing between RPM-based (RHEL, Fedora, Rocky) and Debian-based (Ubuntu, Kali).
+* Software Licensing: Understanding the basics of Open Source (GPL, MIT, Apache) vs. proprietary software.
