@@ -131,3 +131,196 @@ In a modern environment, storage isn't always local.
 
 * NFS (Network File System): Standard for Linux-to-Linux sharing. Know the /etc/exports file and the showmount command.
 * SMB/CIFS: Standard for Windows/Linux interoperability. Focus on using mount -t cifs and providing credentials securely.
+
+#3 Storage Health and Troubleshooting
+
+You need to be able to detect when a disk is failing or full.
+
+* Monitoring Space: df -h (disk free) and du -sh (disk usage).
+* Health Checks: smartctl (S.M.A.R.T. monitoring) to check for hardware failure indicators.
+* Inodes: Understanding that a disk can be "full" even if it has gigabytes of space left if it runs out of Inodes (trackers for small files). Use df -i to check this.
+
+Task,Command
+ View disk partitions,      lsblk or fdisk -l
+ Create a filesystem,      mkfs.ext4 /dev/sdb1
+ Check filesystem integrity,      fsck /dev/sdb1
+List Volume Groups,      vgs or vgdisplay
+Get Device UUID,            blkid
+Mount all in fstab,         mount -a
+
+# 1.4
+
+## Interface Configuration
+You need to know how to identify and configure network interfaces.
+
+* Naming Conventions: Understand why interfaces aren't just eth0 anymore. Modern systems use Predictable Network Interface Names (like enp0s3), which are based on physical hardware locations.
+
+* Commands
+
+            ip addr: The modern replacement for ifconfig. Used to view and assign IP addresses.
+
+            ip link: Used to activate or deactivate an interface (e.g., ip link set dev eth0 up).
+
+            nmcli: The command-line interface for NetworkManager. This is the primary tool for RHEL/Fedora/Ubuntu desktop systems.
+
+            nmtui: The text-based user interface (great for exam scenarios where you need a "GUI-like" feel in a terminal).
+
+## Name Resolution (DNS)
+
+If you can ping an IP but not a website, it’s a DNS issue.
+
+            /etc/hosts: The first place the system looks for local name-to-IP mappings.
+
+            /etc/resolv.conf: Contains the IP addresses of the DNS servers your system queries.
+
+                  Note: On modern systems, this file is often managed by systemd-resolved.
+
+            /etc/nsswitch.conf: Determines the order in which the system looks for names (e.g., "Check /etc/hosts first, then check DNS").
+
+            Tools: dig and host are the standard tools for testing DNS records.
+
+## Routing and Gateways
+
+Getting traffic out of your local network and onto the internet.
+
+            The Routing Table: View it using ip route or route -n.
+
+            Default Gateway: The "exit door" for any traffic not destined for the local subnet. You can add one using ip route add default via [IP].
+
+            IP Forwarding: Crucial for Linux machines acting as routers. This is toggled in /proc/sys/net/ipv4/ip_forward.
+
+## Troubleshooting Tools
+
+The exam will likely give you a "broken" scenario and ask which tool to use.
+
+ping	Checks basic connectivity (ICMP).
+traceroute - Shows every "hop" (router) between you and the destination.
+mtr -	A "live" version of traceroute that combines ping and path tracing.
+ss -	(Socket Statistics) Replaces netstat. Shows open ports and active connections.
+tcpdump -	A packet sniffer. Used for deep-dive analysis of what is actually hitting the wire.
+nslookup - 	A legacy tool for DNS queries (prefer dig for the exam).
+
+# 1.5
+
+## Localization (Locales) 
+
+Locales define the language, country, and specific character encoding (like UTF-8) for the system.
+
+* The Concept: A locale string looks like en_US.UTF-8.
+
+      en = Language (English)
+
+      US = Territory (United States)
+
+      UTF-8 = Codeset (Character encoding)
+
+* Key Commands:
+
+      localectl: The modern systemd tool to view and set the system locale and keyboard layout.
+
+      locale: Displays the current environment variables (like LANG, LC_TIME, and LC_ALL).
+
+      locale -a: Lists all currently available locales on the system.
+
+## Time and Date Management
+
+In a networked world, having the wrong time can break SSL/TLS certificates and make log analysis impossible.
+
+System Time vs. Hardware Clock:
+
+            System Time: Maintained by the Linux kernel.
+
+            Hardware Clock (RTC): The battery-backed clock on the motherboard.
+
+* Commands:
+
+      date: Views or sets the system time.
+
+      hwclock: Synchronizes the system clock and the hardware clock (--systohc or --hctosys).
+
+      timedatectl: The primary systemd command for managing time, time zones, and NTP status.
+
+      Time Zones: Managed via /etc/localtime (usually a symbolic link to a file in /usr/share/zoneinfo/).
+
+## Network Time Protocol (NTP)
+
+Keeping clocks in sync across multiple servers.
+
+* Chrony: The modern default NTP client/server for many distros (RHEL, Fedora). It’s designed to work well even on systems that are frequently offline or have unstable connections.
+
+        Config file:/etc/chrony.conf
+
+* systemd-timesyncd: A lightweight NTP client built into systemd, used for simple SNTP (Simple Network Time Protocol) syncing.
+* ntp (ntpd): The classic, legacy NTP daemon.
+
+## User and Global Profiles
+
+File-Scope-Description
+/etc/profile - Global - Set for all users upon login.
+/etc/bashrc (or bash.bashrc) - Global - Functions and aliases for all users in Bash.
+~/.bash_profile - User - User-specific environment settings (runs once at login).
+~/.bashrc,- User - User-specific aliases and functions (runs for every new terminal).
+
+## Environment Variables
+
+These are dynamic "values" that the system and applications reference.
+
+* PATH: Arguably the most important variable. It defines the directories where the system looks for executable commands.
+* EDITOR: Defines the default text editor (e.g., vi or nano).
+* HOME: The current user's home directory.
+* Commands: * export VARNAME=value: Sets a variable for the current session and sub-processes.
+
+        env: Lists exported environment variables.
+
+Feature,timedatectl,localectl
+Change Timezone- set-timezone[Zone]- N/A
+Change Language- N/A- set-locale LANG=[Locale]
+Enable NTP- set-ntp true- N/A
+Change Keyboard- N/A- set-x11-keymap [layout]
+
+# 1.6
+
+## Package Management (The Big Three)
+
+Linux doesn't use "InstallShield" wizards. It uses package managers. You need to know the specific commands for the two major families and the emerging universal formats.
+
+### The Debian/Ubuntu Family (DEB)
+
+* Low-level tool: dpkg (Used for local .deb files; doesn't handle dependencies).
+* High-level tool: apt (The modern standard) or apt-get (legacy/scripting).
+* Key commands: * apt update: Refreshes the list of available software.
+
+      apt upgrade: Installs the latest versions of all packages.
+
+      apt search [app]: Finds a package in the repositories.
+
+### The RHEL/Fedora/CentOS Family (RPM)
+
+* Low-level tool: rpm (Used for local .rpm files).
+* High-level tool: dnf (The modern standard, replaces the older yum).
+* Key commands:
+
+      dnf install [package]: Installs with dependency resolution.
+
+      dnf provides [file]: A "magic" command that tells you which package contains a specific missing file.
+
+### Universal/Sandboxed Packages
+
+These work on almost any distro and bundle all their dependencies together.
+
+* Snap: Developed by Canonical (Ubuntu). Managed via the snap command.
+* Flatpak: Popular for desktop Linux. Managed via the flatpak command.
+* AppImage: A single executable file; no installation required.
+
+## Managing Services with systemd
+
+Most modern distros use systemd to manage background services (daemons). The systemctl command is your primary tool here.
+
+Task,Command
+Start a service immediately- systemctl start [service]
+Stop a service immediately- systemctl stop [service]
+Make a service start at boot- systemctl enable [service]
+Prevent a service from starting at boot- systemctl disable [service]
+Check if a service is running/failed- systemctl status [service]
+Restart and apply config changes- systemctl restart [service]
+Completely block a service from starting- systemctl mask [service]
