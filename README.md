@@ -31,3 +31,48 @@ Modern Linux admins deal with more than just standard PCs. You must recognize th
 
 * Distribution Families: Distinguishing between RPM-based (RHEL, Fedora, Rocky) and Debian-based (Ubuntu, Kali).
 * Software Licensing: Understanding the basics of Open Source (GPL, MIT, Apache) vs. proprietary software.
+
+## The Boot Process Flow
+
+You need to know the chronological order of a Linux boot. If a system fails to start, knowing which stage it's stuck in tells you exactly what is broken.
+
+* BIOS/UEFI: Performs the Power-On Self-Test (POST) and locates the bootloader.
+* Bootloader (GRUB2): Loads the kernel and the initramfs into memory.
+* Kernel: Initializes hardware and mounts the root filesystem (read-only initially).
+* Init Process: The kernel starts the first process (PID 1), which is almost always systemd on modern distros.
+* Targets/Runlevels: systemd brings up services (network, GUI, etc.) based on the default target.
+
+## GRUB2 (Grand Unified Bootloader)
+GRUB2 is the industry standard bootloader. You need to know how to navigate and configure it.
+
+* Configuration Files: * /etc/default/grub: Where you make your manual edits (e.g., changing the timeout or adding kernel parameters).
+
+      /boot/grub/grub.cfg: The main config file (Do not edit this manually; it is auto-generated).
+
+* Applying Changes: After editing /etc/default/grub, you must run:
+
+      update-grub (Debian/Ubuntu)
+
+      grub2-mkconfig -o /boot/grub2/grub.cfg (RHEL/Fedora)
+
+Interactive Menu: Pressing e at the GRUB menu allows you to edit boot parameters temporarily—useful for booting into "single-user mode" to reset a lost root password.
+
+### Essential systemctl Commands:
+
+     systemctl get-default: See if your system boots to CLI or GUI by default.
+     systemctl set-default graphical.target: Change the default boot mode.
+     systemctl isolate multi-user.target: Switch to a different mode immediately without rebooting.
+
+## Initial RAM Filesystem (initramfs)
+
+The kernel is often too small to contain every driver for every possible hard drive or RAID controller.
+
+* The Job: initramfs is a small filesystem loaded into RAM that contains the specific drivers needed to mount the "real" root partition on the hard drive.
+* Command: dracut or mkinitramfs are used to regenerate this file if you change hardware or update drivers.
+
+## Shutdown and Reboot
+While systemctl reboot is the modern way, the legacy shutdown command is still heavily tested.
+
+    shutdown -h +10 "Maintenance starting": Halts the system in 10 minutes and sends a message to all logged-in users.
+
+    shutdown -c: Cancels a pending shutdown.
