@@ -1,5 +1,7 @@
 # Introduction to Linux Shell and Shell Scripting
 
+# 1.1
+
 ## The Basic Boot Process
 You are expected to understand the sequence of events from power-on to the login prompt.
 
@@ -31,6 +33,8 @@ Modern Linux admins deal with more than just standard PCs. You must recognize th
 
 * Distribution Families: Distinguishing between RPM-based (RHEL, Fedora, Rocky) and Debian-based (Ubuntu, Kali).
 * Software Licensing: Understanding the basics of Open Source (GPL, MIT, Apache) vs. proprietary software.
+
+# 1.2
 
 ## The Boot Process Flow
 
@@ -76,3 +80,54 @@ While systemctl reboot is the modern way, the legacy shutdown command is still h
     shutdown -h +10 "Maintenance starting": Halts the system in 10 minutes and sends a message to all logged-in users.
 
     shutdown -c: Cancels a pending shutdown.
+
+# 1.3 
+
+## Partitioning and Filesystems
+
+You are expected to know how to prepare a raw disk for data.
+
+* Partitioning Tables: Understand the difference between MBR (legacy, 4 primary partitions, 2TB limit) and GPT (modern, 128 partitions, massive capacity).
+
+Tools:
+
+            fdisk: Standard for MBR and basic GPT.
+
+            gdisk: Specifically for GPT partitions.
+
+            parted: A powerful tool that supports resizing and scriptable partitioning.
+
+* Filesystem Types: Know when to use Ext4 (general purpose), XFS (high performance/large files), Btrfs (snapshots/pooling), and VfAT/ExFAT (cross-platform compatibility).
+
+### Logical Volume Management (LVM)
+
+This is a critical "bread and butter" skill for Linux admins. LVM allows you to resize partitions without unmounting them (in some cases) and aggregate multiple disks.
+
+The Hierarchy:
+
+            Physical Volumes (PV): Initializing a partition for LVM (pvcreate).
+
+            Volume Groups (VG): Pooling PVs together (vgcreate).
+
+            Logical Volumes (LV): Creating the "virtual" partitions users actually see (lvcreate).
+
+* Key Operations: Extending a volume (lvextend), reducing a volume (lvreduce), and taking snapshots for backups.
+
+## Mounting and Persistence
+
+The kernel needs to know where to "hook" the storage into the directory tree.
+
+* Manual Mounting: Using mount and umount.
+
+* Persistent Mounting: Managing the /etc/fstab file. You must know the syntax:
+
+            [Device/UUID] [Mount Point] [Filesystem Type] [Options] [Dump] [Pass]
+
+* UUIDs: Why using the Universally Unique Identifier (blkid) is safer than using device names like /dev/sdb1 (which can change between reboots).
+
+## Network Storage (NFS and SMB)
+
+In a modern environment, storage isn't always local.
+
+* NFS (Network File System): Standard for Linux-to-Linux sharing. Know the /etc/exports file and the showmount command.
+* SMB/CIFS: Standard for Windows/Linux interoperability. Focus on using mount -t cifs and providing credentials securely.
