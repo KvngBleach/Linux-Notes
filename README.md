@@ -317,10 +317,43 @@ These work on almost any distro and bundle all their dependencies together.
 Most modern distros use systemd to manage background services (daemons). The systemctl command is your primary tool here.
 
 Task,Command
-Start a service immediately- systemctl start [service]
-Stop a service immediately- systemctl stop [service]
-Make a service start at boot- systemctl enable [service]
-Prevent a service from starting at boot- systemctl disable [service]
-Check if a service is running/failed- systemctl status [service]
-Restart and apply config changes- systemctl restart [service]
-Completely block a service from starting- systemctl mask [service]
+* Start a service immediately- systemctl start [service]
+* Stop a service immediately- systemctl stop [service]
+* Make a service start at boot- systemctl enable [service]
+* Prevent a service from starting at boot- systemctl disable [service]
+* Check if a service is running/failed- systemctl status [service]
+* Restart and apply config changes- systemctl restart [service]
+* Completely block a service from starting- systemctl mask [service]
+
+## Compiling from Source
+
+Sometimes software isn't in a repository, and you have to build it yourself. You must know the "Holy Trinity" of commands:
+
+      ./configure: Checks your system for required libraries and creates a Makefile.
+
+      make: Compiles the source code into binary files.
+
+      sudo make install: Moves those binaries into the system directories (like /usr/local/bin).
+
+## Shared Libraries
+
+Software often relies on shared code libraries (files ending in .so).
+
+* ldd: Shows which libraries a specific program needs to run.
+* ldconfig: Updates the library cache so the system can find newly installed libraries.
+* /etc/ld.so.conf: The configuration file that lists directories where the system looks for libraries.
+
+## Software Repositories
+
+You need to know where the "list of stores" is kept.
+
+* Debian/Ubuntu: Managed in /etc/apt/sources.list and /etc/apt/sources.list.d/.
+* RHEL/Fedora: Managed in /etc/yum.repos.d/.
+
+### Critical Exam Scenario: "The Missing Dependency"
+If the exam asks how to fix a broken installation:
+
+      On Ubuntu, you’d use apt --fix-broken install.
+
+      On RHEL, you’d use dnf check or dnf history rollback to undo a botched update.
+
