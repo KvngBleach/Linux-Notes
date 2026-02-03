@@ -11,3 +11,12 @@
       Dump 0 Legacy backup flag. Almost always 0 today.
 
       Pass 2 "Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check."
+
+
+Field	Example	Description	
+1. Device	UUID=... or /dev/sdb1	The identifier for the partition. UUID is preferred as device names can change.	
+2. Mount Point	/mnt/data	The directory where the disk will "live."	
+3. FS Type	ext4	The filesystem (ext4, xfs, btrfs, nfs, etc.).	
+4. Options	defaults	Common flags: rw (read-write), noexec (prevent binaries from running), _netdev (wait for network).	
+5. Dump	0	Legacy backup flag. Almost always 0 today.	
+6. Pass	2	Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check.	
