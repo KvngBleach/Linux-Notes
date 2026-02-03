@@ -63,9 +63,9 @@ Question: A technician adds a new 1TB drive and wants it to mount automatically 
 
 What would the /etc/fstab line look like?
 
-## Ansible Playbook Anatomy
-
       UUID=xxxx-xxxx /backup xfs defaults 0 2
+
+## Ansible Playbook Anatomy
 
 ---
       - name: Configure Apache Web Servers  # Description of the play
