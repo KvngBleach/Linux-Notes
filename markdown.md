@@ -63,4 +63,23 @@ Question: A technician adds a new 1TB drive and wants it to mount automatically 
 
 What would the /etc/fstab line look like?
 
+## Ansible Playbook Anatomy
+
       UUID=xxxx-xxxx /backup xfs defaults 0 2
+
+---
+      - name: Configure Apache Web Servers  # Description of the play
+        hosts: web_servers                 # The group of servers from your inventory
+        become: yes                        # Run as sudo/root
+
+        tasks:
+    - name: Install apache2 package  # Description of the specific task
+      apt:                           # The module being used (Debian/Ubuntu)
+        name: apache2
+        state: present               # "present" means install it
+
+    - name: Start the apache service
+      service:                       # The module for managing services
+        name: apache2
+        state: started
+        enabled: yes                 # Make sure it starts on boot
