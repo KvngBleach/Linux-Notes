@@ -357,3 +357,43 @@ If the exam asks how to fix a broken installation:
 
       On RHEL, you’d use dnf check or dnf history rollback to undo a botched update.
 
+## Automation and Orchestration Concepts
+
+This is the theoretical heart of the section. You need to distinguish between automation (one task) and orchestration (a workflow of many automated tasks).
+
+* Infrastructure as Code (IaC): Managing and provisioning infrastructure through machine-readable definition files rather than physical hardware configuration or interactive configuration tools.
+* Idempotency: A core concept in tools like Ansible. It means that no matter how many times you run a script, the result remains the same without causing errors or duplicate configurations.
+* Self-healing: Systems that automatically detect a failure (like a downed service) and restart or replace it without human intervention.
+* Agent vs. Agentless: * Agent-based: Requires software installed on the target (e.g., Puppet, Chef).
+* Agentless: Operates over standard protocols like SSH (e.g., Ansible).
+
+## Verison Control (Git)
+
+You are expected to understand the basic lifecycle of code management, as scripts and configuration files are now treated like software.
+
+* Core Commands: git init, add, commit, push, pull, clone, and merge.
+* Branching: Understanding how to work on a "feature branch" before merging it into the "main/master" branch.
+* Repositories: The difference between local repositories and remote ones (GitHub, GitLab, Bitbucket).
+
+## Orchestration and Configuration Tools
+
+While you don't need to be a developer, you must recognize the syntax and use cases for:
+
+* Ansible: Uses YAML files called Playbooks. It is the most common tool featured on the exam due to its simplicity and Linux-native feel.
+* Terraform: Uses HCL (HashiCorp Configuration Language). It is used for "provisioning" (creating the server itself) rather than "configuring" (installing apps on the server).
+* Kubernetes (K8s): Basic awareness of container orchestration—how it manages the deployment and scaling of containers.
+
+## Scheduling Tasks
+
+This is the "old school" automation that is still vital today.
+
+* Cron: Familiarize yourself with the crontab format:
+
+            * * * * * command_to_execute (Minute, Hour, Day of Month, Month, Day of Week).
+
+* Systemd Timers: The modern Linux replacement for Cron. You should know that they offer better logging via journalctl and can be more precise than Cron.
+
+* at: Used for one-time future tasks (e.g., at 10:00 PM).
+
+
+5. Scripting Best Practices
