@@ -342,70 +342,71 @@ While systemctl reboot is the modern way, the legacy shutdown command is still h
 
 # 1.3 
 
-## Partitioning and Filesystems
+Network Interface Configuration
+You need to know how to view and modify network settings. While older commands like ifconfig are still around, CompTIA emphasizes the modern iproute2 and NetworkManager tools.
 
-You are expected to know how to prepare a raw disk for data.
+### ip command suite:
 
-* Partitioning Tables: Understand the difference between MBR (legacy, 4 primary partitions, 2TB limit) and GPT (modern, 128 partitions, massive capacity).
+      ip addr: View IP addresses.
 
-Tools:
+      ip link: View/modify the state of the interface (up/down).
 
-            fdisk: Standard for MBR and basic GPT.
+      ip route: View or set the routing table (default gateway).
 
-            gdisk: Specifically for GPT partitions.
+### NetworkManager (nmcli and nmtui):
 
-            parted: A powerful tool that supports resizing and scriptable partitioning.
+      nmcli: The command-line tool for managing connections.
 
-* Filesystem Types: Know when to use Ext4 (general purpose), XFS (high performance/large files), Btrfs (snapshots/pooling), and VfAT/ExFAT (cross-platform compatibility).
+      nmtui: The text-based user interface (useful if you hate long commands).
 
-### Logical Volume Management (LVM)
+### Hostname Management:
 
-This is a critical "bread and butter" skill for Linux admins. LVM allows you to resize partitions without unmounting them (in some cases) and aggregate multiple disks.
+      hostnamectl: View or change the system's hostname.
 
-The Hierarchy:
+      /etc/hostname: The persistent file where the hostname is stored.
 
-            Physical Volumes (PV): Initializing a partition for LVM (pvcreate).
+## IP Addressing and Name Resolution
+Understanding how Linux translates names to numbers (and vice versa) is a high-priority exam topic.
 
-            Volume Groups (VG): Pooling PVs together (vgcreate).
+* /etc/hosts: The "local" phonebook. The system checks this before asking a DNS server.
 
-            Logical Volumes (LV): Creating the "virtual" partitions users actually see (lvcreate).
+* /etc/resolv.conf: Tells Linux which DNS servers (like 8.8.8.8) to query.
 
-* Key Operations: Extending a volume (lvextend), reducing a volume (lvreduce), and taking snapshots for backups.
+* /etc/nsswitch.conf: The "traffic cop" file that determines the order of lookup (e.g., "Check /etc/hosts first, then DNS").
 
-## Mounting and Persistence
+### DNS Tools:
 
-The kernel needs to know where to "hook" the storage into the directory tree.
+* dig: The preferred tool for detailed DNS queries.
 
-* Manual Mounting: Using mount and umount.
+* nslookup: The classic tool for simple name resolution checks.
 
-* Persistent Mounting: Managing the /etc/fstab file. You must know the syntax:
+* host: A quick way to find an IP for a name.
 
-            [Device/UUID] [Mount Point] [Filesystem Type] [Options] [Dump] [Pass]
+## Network Troubleshooting (The "Three-Layer" Approach)
+CompTIA loves "What is the next step?" questions. You must know which tool to use for which problem:
 
-* UUIDs: Why using the Universally Unique Identifier (blkid) is safer than using device names like /dev/sdb1 (which can change between reboots).
+1. Connectivity (Can I reach it?):
+2. ping: Tests basic ICMP connectivity.
+3. traceroute (or tracepath): Shows every "hop" between you and the destination.
+4. Ports and Services (Is the app listening?):
+5. ss: The modern replacement for netstat. Use ss -tunlp to see listening ports.
+6. nmap: Used to scan for open ports on remote systems.
+7. Packet Analysis (What is happening in the wire?):
+8. tcpdump: A command-line packet sniffer.
+9. wireshark: The GUI version of a packet analyzer (rarely on the exam, but good to know).
 
-## Network Storage (NFS and SMB)
+## Basic Firewall Management
+Linux systems use the kernel's Netfilter framework, but you manage it via "wrappers."
 
-In a modern environment, storage isn't always local.
+* firewalld: The default on RHEL/Fedora. Uses "zones" (e.g., public, internal).
 
-* NFS (Network File System): Standard for Linux-to-Linux sharing. Know the /etc/exports file and the showmount command.
-* SMB/CIFS: Standard for Windows/Linux interoperability. Focus on using mount -t cifs and providing credentials securely.
+      Command: firewall-cmd.
 
-#3 Storage Health and Troubleshooting
+* ufw (Uncomplicated Firewall): The default on Ubuntu/Debian.
 
-You need to be able to detect when a disk is failing or full.
+      Command: ufw allow 22/tcp.
 
-* Monitoring Space: df -h (disk free) and du -sh (disk usage).
-* Health Checks: smartctl (S.M.A.R.T. monitoring) to check for hardware failure indicators.
-* Inodes: Understanding that a disk can be "full" even if it has gigabytes of space left if it runs out of Inodes (trackers for small files). Use df -i to check this.
-
-Task,Command
- View disk partitions,      lsblk or fdisk -l
- Create a filesystem,      mkfs.ext4 /dev/sdb1
- Check filesystem integrity,      fsck /dev/sdb1
-List Volume Groups,      vgs or vgdisplay
-Get Device UUID,            blkid
-Mount all in fstab,         mount -a
+* iptables: The legacy tool. You should recognize its basic syntax (INPUT, OUTPUT, FORWARD chains).
 
 # 1.4
 
