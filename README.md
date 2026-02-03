@@ -34,6 +34,60 @@ Modern Linux admins deal with more than just standard PCs. You must recognize th
 * Distribution Families: Distinguishing between RPM-based (RHEL, Fedora, Rocky) and Debian-based (Ubuntu, Kali).
 * Software Licensing: Understanding the basics of Open Source (GPL, MIT, Apache) vs. proprietary software.
 
+## The Boot Process
+You need to know the chronological order of how a system wakes up. CompTIA loves to ask what happens right before or after a specific step.
+
+* BIOS/UEFI: Hardware initialization and Power-On Self-Test (POST).
+* Bootloader (GRUB2): Loads the kernel into memory.
+* Kernel: Mounts the root filesystem and starts the first process.
+* Initial RAM Disk (initramfs): Provides temporary drivers needed to mount the real filesystem.
+* Init System (Systemd): Starts all services (daemons) and targets.
+
+## Kernel Management
+The kernel is the bridge between software and hardware. In 1.1, you focus on managing its modules (drivers).
+
+* lsmod: Lists currently loaded modules.
+* modinfo: Shows details about a specific module (author, description, parameters).
+* modprobe: The "smart" way to load or unload modules (it handles dependencies automatically).
+* insmod / rmmod: The "manual" way to load/unload (it does not handle dependencies).
+* /etc/modprobe.d/: Where you go to "blacklist" a module so it never loads.
+
+## Software Package Management
+This is a huge part of the exam. You must be bilingual in Red Hat (RPM) and Debian (DPKG) styles.
+
+The Low-Level Tools (Local files)
+
+      rpm: Used for .rpm files. Common flags: -ivh (install), -Uvh (upgrade), -e (erase/uninstall).
+
+      dpkg: Used for .deb files. Common flags: -i (install), -r (remove), -P (purge configuration files).
+
+The High-Level Tools (Repositories/Internet)
+These tools handle dependencies (if Package A needs Package B, these tools download both).
+
+      dnf / yum: The standard for RHEL/Fedora/CentOS.
+
+      apt / apt-get: The standard for Debian/Ubuntu/Kali.
+
+      zypper: Used primarily for openSUSE.
+
+ ## Shared Libraries
+ 
+Software often shares "library" files (think .so files in Linux, similar to .dll in Windows).
+
+* ldd: Use this to see which libraries a specific program depends on.
+* ldconfig: Updates the cache for shared libraries so the system can find new ones.
+* LD_LIBRARY_PATH: An environment variable that tells the system where to look for libraries first.
+
+       /boot: Contains the kernel (vmlinuz) and the bootloader files.
+
+      /etc/yum.repos.d/: Where DNF/YUM repository URLs are stored.
+
+      /etc/apt/sources.list: Where APT repository URLs are stored.
+
+      /lib/modules/: Where the actual kernel module files reside.
+
+Common Exam Trap: CompTIA might ask which tool to use if you want to install a package and its dependencies. The answer is always the high-level tool (dnf or apt), not the low-level tool (rpm or dpkg).
+
 # 1.2
 
 ## The Boot Process Flow
