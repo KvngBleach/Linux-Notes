@@ -160,22 +160,32 @@ mount / umount: Commands for temporary manual mounting.
 
       4. Options (defaults, ro, noexec)
 
-Dump (Backup)
+      5. Dump (Backup)
 
-Pass (Fsck check order)
+      6. Pass (Fsck check order)
 
-5. Storage Concepts and Quotas
-Swap: Virtual memory on the disk. Know mkswap, swapon, and free -m.
+## Storage Concepts and Quotas
 
-Disk Quotas: Restricting how much space a user can take up. Commands: quota, edquota, and setquota.
+      Swap: Virtual memory on the disk. Know mkswap, swapon, and free -m.
 
-RAID: Basic understanding of Software RAID (using mdadm).
+      Disk Quotas: Restricting how much space a user can take up. Commands: quota, edquota, and setquota.
 
-RAID 0: Striping (Fast, no redundancy).
+      RAID: Basic understanding of Software RAID (using mdadm).
 
-RAID 1: Mirroring (Redundant).
+      RAID 0: Striping (Fast, no redundancy).
 
-RAID 5/6/10: Balance of speed and redundancy.
+      RAID 1: Mirroring (Redundant).
+
+      RAID 5/6/10: Balance of speed and redundancy.
+
+Important Paths to Know:
+
+      /dev/: Where device files live (e.g., /dev/sda is the whole disk, /dev/sda1 is a partition).
+
+      /dev/mapper/: Where LVM volumes are typically mapped.
+
+      /etc/mtab: Shows currently mounted filesystems (similar to the output of the mount command).
+
 
 ## GRUB2 (Grand Unified Bootloader)
 GRUB2 is the industry standard bootloader. You need to know how to navigate and configure it.
