@@ -397,3 +397,68 @@ This is the "old school" automation that is still vital today.
 
 
 ## Scripting Best Practices
+
+Automation is only as good as the script behind it. Section 1.6 looks for:
+
+* Input Validation: Ensuring the script doesn't crash if a user provides the wrong data.
+* Error Handling: Using if statements to check if a directory exists before trying to write to it.
+* Environmental Variables: Using variables like $PATH or custom keys to ensure scripts work across different environments (Dev vs. Production).
+
+Tool,Language Style/Primary Use/Connectivity
+Ansible/YAML/Configuration Management/Agentless (SSH)
+Terraform/HCL / JSON / Infrastructure Provisioning/ API-based
+Git/Command Line/Version Control/SSH / HTTPS
+Bash/Scripting/Task Automation/Local/Direct
+
+## The Cron "Cheat Sheet"
+
+Field,Range,Notes
+
+      Minute,0 - 59,
+
+      Hour,0 - 23,0 is Midnight
+
+      Day of Month,1 - 31,
+
+      Month,1 - 12,Or JAN-DEC
+
+      Day of Week,0 - 6,0 or 7 is Sunday; or SUN-SAT
+
+* 30 02 * * *: Runs every day at 2:30 AM.
+
+* 0 0 * * 1: Runs every Monday at Midnight.
+
+* */15 * * * *: Runs every 15 minutes.
+
+* 0 8-17 * * 1-5: Runs every hour on the hour, during business hours (8 AM - 5 PM), Mon-Fri.*
+
+---
+      - name: Configure Apache Web Servers  # Description of the play
+        hosts: web_servers                 # The group of servers from your inventory
+        become: yes                        # Run as sudo/root
+
+        tasks:
+    - name: Install apache2 package  # Description of the specific task
+      apt:                           # The module being used (Debian/Ubuntu)
+        name: apache2
+        state: present               # "present" means install it
+
+    - name: Start the apache service
+      service:                       # The module for managing services
+        name: apache2
+        state: started
+        enabled: yes                 # Make sure it starts on boot
+
+### What to look for on the Exam:
+
+* Modules: Keywords like apt, yum, copy, service, or file.
+* State: This is where Idempotency happens. Using state: present tells Ansible "only install this if it isn't already there."
+* Hosts: This matches the names in your /etc/ansible/hosts (inventory) file.
+
+### The Comparison: Cron vs. Systemd Timers
+
+Since the XK0-006 emphasizes modern standards, they might ask why you'd use a Systemd Timer over a Cron job.
+
+* Logging: Systemd timers log directly to journalctl, making them easier to debug.
+* Dependencies: A Systemd timer can wait for the network to be up before running; Cron just runs regardless.
+* Precision: Systemd can trigger tasks down to the microsecond; Cron is limited to the minute.
