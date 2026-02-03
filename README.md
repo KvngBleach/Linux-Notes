@@ -178,7 +178,7 @@ mount / umount: Commands for temporary manual mounting.
 
       RAID 5/6/10: Balance of speed and redundancy.
 
-Important Paths to Know:
+## Important Paths to Know:
 
       /dev/: Where device files live (e.g., /dev/sda is the whole disk, /dev/sda1 is a partition).
 
