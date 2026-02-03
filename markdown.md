@@ -87,8 +87,13 @@ What would the /etc/fstab line look like?
         enabled: yes                 # Make sure it starts on boot
 
 
-File Path                       |Purpose
-/etc/services,                  |Lists port numbers and their associated protocols (e.g., 80 = HTTP)."
-/etc/sysconfig/network-scripts/ |(Legacy RHEL) Where interface config files live.
-/etc/netplan/                   |(Modern Ubuntu) Where YAML-based network configs live.
-/etc/protocols                  |Lists available internet protocols (TCP, UDP, ICMP)."
+      File Path                       |Purpose
+
+      /etc/services,                  |Lists port numbers and their associated protocols (e.g., 80 = HTTP)."
+
+      /etc/sysconfig/network-scripts/ |(Legacy RHEL) Where interface config files live.
+
+      /etc/netplan/                   |(Modern Ubuntu) Where YAML-based network configs live.
+
+      /etc/protocols                  |Lists available internet protocols (TCP, UDP, ICMP)."
+
