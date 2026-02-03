@@ -1,12 +1,14 @@
 # Descript Breakdowns
 
-Field | Example | Description
-1. Device | UUID=... or /dev/sdb1 | The identifier for the partition. UUID is preferred as device names can change.
-2. Mount Point | /mnt/data | "The directory where the disk will ""live."""
-3. FS Type | ext4 | "The filesystem (ext4, xfs, btrfs, nfs, etc.)."
-4. Options | defaults | "Common flags: rw (read-write), noexec (prevent binaries from running), _netdev (wait for network)."
-5. Dump | 0 | Legacy backup flag. Almost always 0 today.
-6. Pass | 2 | "Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check."
+## 1.2
+
+Field           |Example                   |Description
+1. Device       |UUID=... or /dev/sdb1     |The identifier for the partition. UUID is preferred as device names can change.
+2. Mount Point  |/mnt/data                 |"The directory where the disk will ""live."""
+3. FS Type      | ext4                     | "The filesystem (ext4, xfs, btrfs, nfs, etc.)."
+4. Options      | defaults                 | "Common flags: rw (read-write), noexec (prevent binaries from running), _netdev (wait for network)."
+5. Dump         | 0                        | Legacy backup flag. Almost always 0 today.
+6. Pass         | 2                        | "Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check."
 
 ## LVM Step-by-Step (The "Building" Process)
 
@@ -83,3 +85,10 @@ What would the /etc/fstab line look like?
         name: apache2
         state: started
         enabled: yes                 # Make sure it starts on boot
+
+
+File Path                       |Purpose
+/etc/services,                  |Lists port numbers and their associated protocols (e.g., 80 = HTTP)."
+/etc/sysconfig/network-scripts/ |(Legacy RHEL) Where interface config files live.
+/etc/netplan/                   |(Modern Ubuntu) Where YAML-based network configs live.
+/etc/protocols                  |Lists available internet protocols (TCP, UDP, ICMP)."
