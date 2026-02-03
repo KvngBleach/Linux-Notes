@@ -72,8 +72,8 @@ What would the /etc/fstab line look like?
         hosts: web_servers                 # The group of servers from your inventory
         become: yes                        # Run as sudo/root
 
-        tasks:
-    - name: Install apache2 package  # Description of the specific task
+         tasks:
+        - name: Install apache2 package  # Description of the specific task
       apt:                           # The module being used (Debian/Ubuntu)
         name: apache2
         state: present               # "present" means install it
