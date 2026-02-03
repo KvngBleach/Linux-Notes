@@ -1,22 +1,66 @@
-# Field/Example/Description
+# Descript Breakdowns
 
-      Device/UUID=... or /dev/sdb1/The identifier for the partition. UUID is preferred as device names can change.
+Field | Example | Description
+1. Device | UUID=... or /dev/sdb1 | The identifier for the partition. UUID is preferred as device names can change.
+2. Mount Point | /mnt/data | "The directory where the disk will ""live."""
+3. FS Type | ext4 | "The filesystem (ext4, xfs, btrfs, nfs, etc.)."
+4. Options | defaults | "Common flags: rw (read-write), noexec (prevent binaries from running), _netdev (wait for network)."
+5. Dump | 0 | Legacy backup flag. Almost always 0 today.
+6. Pass | 2 | "Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check."
 
-      Mount Point /mnt/data "The directory where the disk will ""live."""
+## LVM Step-by-Step (The "Building" Process)
 
-      FS Type ext4 "The filesystem (ext4, xfs, btrfs, nfs, etc.)."
+LVM is like LEGOs for storage. You take small pieces and build a big structure.
 
-      Options defaults "Common flags: rw (read-write), noexec (prevent binaries from running), _netdev (wait for network)."
+### Step 1: Initialize Physical Volumes (PV)
+Tell Linux to treat raw disks/partitions as LVM-ready.
 
-      Dump 0 Legacy backup flag. Almost always 0 today.
+      Command: pvcreate /dev/sdb1 /dev/sdc1
 
-      Pass 2 "Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check."
+      Verification: pvdisplay or pvs
 
+### Step 2: Create a Volume Group (VG)
+Pool those physical disks into one big "bucket" of storage.
 
-Field	Example	Description	
-1. Device	UUID=... or /dev/sdb1	The identifier for the partition. UUID is preferred as device names can change.	
-2. Mount Point	/mnt/data	The directory where the disk will "live."	
-3. FS Type	ext4	The filesystem (ext4, xfs, btrfs, nfs, etc.).	
-4. Options	defaults	Common flags: rw (read-write), noexec (prevent binaries from running), _netdev (wait for network).	
-5. Dump	0	Legacy backup flag. Almost always 0 today.	
-6. Pass	2	Fsck check order: 1 for root (/), 2 for other drives, 0 to skip check.	
+      Command: vgcreate vg_data /dev/sdb1 /dev/sdc1
+
+      Verification: vgdisplay or vgs
+
+### Step 3: Carve out a Logical Volume (LV)
+This is what you actually format and use.
+
+      Command: lvcreate -L 50G -n lv_projects vg_data
+
+      -L: Size (e.g., 50 Gigabytes)
+
+      -n: Name of the volume
+
+      Verification: lvdisplay or lvs
+
+### Step 4: Format and Mount
+Now it behaves like a normal disk.
+
+      Command: mkfs.ext4 /dev/vg_data/lv_projects
+
+      Command: mount /dev/vg_data/lv_projects /projects
+
+## 3. Storage Troubleshooting Commands
+
+On the XK0-006, if a user says "I'm out of space," these are your go-to tools:
+
+* df -h: Shows disk space (Human-readable).
+
+* du -sh /folder: Shows how much space a specific directory is using.
+
+* lsblk: Shows the "tree" view of your blocks (partitions, LVM, and mount points).
+
+* blkid: Used to find the UUID of a disk (essential for fstab).
+
+* fsck: Used to repair a corrupted filesystem (must be unmounted first!).
+
+Quick Scenario Practice:
+Question: A technician adds a new 1TB drive and wants it to mount automatically at boot to /backup using the XFS filesystem. They want the system to check it for errors after the root drive is checked.
+
+What would the /etc/fstab line look like?
+
+      UUID=xxxx-xxxx /backup xfs defaults 0 2
