@@ -14,12 +14,18 @@ You are expected to understand the sequence of events from power-on to the login
 ## Filesystem Hierarchy Standard (FHS)
 
 Directory	Purpose
-/bin & /sbin	Essential binaries (commands) and system binaries for the root user.
-/etc	Configuration files for the system and applications.
-/proc & /sys	Virtual file systems containing Kernel and process information.
-/var	Variable data: Logs (/var/log), mail, and spool files.
-/usr	User programs, libraries, and documentation.
-/boot	Files needed to start the boot process (Kernel images, GRUB).
+
+      /bin & /sbin	Essential binaries (commands) and system binaries for the root user.
+
+      /etc	Configuration files for the system and applications.
+
+      /proc & /sys	Virtual file systems containing Kernel and process information.
+
+      /var	Variable data: Logs (/var/log), mail, and spool files.
+
+      /usr	User programs, libraries, and documentation.
+
+      /boot	Files needed to start the boot process (Kernel images, GRUB).
 
 ## Server Architectures
 
@@ -94,11 +100,82 @@ Common Exam Trap: CompTIA might ask which tool to use if you want to install a p
 
 You need to know the chronological order of a Linux boot. If a system fails to start, knowing which stage it's stuck in tells you exactly what is broken.
 
-* BIOS/UEFI: Performs the Power-On Self-Test (POST) and locates the bootloader.
-* Bootloader (GRUB2): Loads the kernel and the initramfs into memory.
-* Kernel: Initializes hardware and mounts the root filesystem (read-only initially).
-* Init Process: The kernel starts the first process (PID 1), which is almost always systemd on modern distros.
-* Targets/Runlevels: systemd brings up services (network, GUI, etc.) based on the default target.
+## Partitioning and Disk Management
+
+You need to know how to prepare a raw disk for use. This involves choosing a partitioning scheme and using the right tools.
+
+Partitioning Schemes:
+
+      MBR (Master Boot Record): Legacy, supports up to 4 primary partitions and 2TB disk limits.
+
+      GPT (GUID Partition Table): Modern standard, supports massive disks and virtually unlimited partitions.
+
+The Tools:
+
+      fdisk: The classic tool (mostly for MBR).
+
+      gdisk: The GPT equivalent of fdisk.
+
+      parted: A versatile tool that handles both MBR and GPT and supports scriptable resizing.
+
+## File Systems (The "Organizers")
+
+Once partitioned, you must "format" the drive. You need to know the characteristics of the most common Linux filesystems:
+
+      Ext4: The reliable workhorse. Includes journaling to prevent data loss after a crash.
+
+      XFS: Great for high-performance and large files; the default for RHEL-based systems.
+
+      Btrfs: A "next-gen" filesystem that supports snapshots and pooling.
+
+      VFAT/NTFS: Used for compatibility with Windows or removable USB drives.
+
+      NFS (Network File System): Used for mounting remote storage over a network.
+
+## Logical Volume Management (LVM)
+
+This is a high-priority topic. LVM allows you to resize "disks" on the fly without rebooting. You must know the three layers:
+
+      PV (Physical Volume): The raw disk or partition (e.g., /dev/sdb1).
+
+      VG (Volume Group): A "pool" created by combining multiple PVs.
+
+      LV (Logical Volume): The "virtual partition" carved out of the VG that you actually format and mount.
+
+      Command Sequence: pvcreate → vgcreate → lvcreate.
+
+## Mounting and Persistance
+
+Linux doesn't use "C:" drives; it attaches disks to folders (mount points).
+
+mount / umount: Commands for temporary manual mounting.
+
+/etc/fstab: The most important file in this section. It tells Linux which disks to mount automatically at boot. You must understand its fields:
+
+      1. Device (UUID or Path)
+
+      2. Mount Point (e.g., /home)
+
+      3. Filesystem Type (e.g., ext4)
+
+      4. Options (defaults, ro, noexec)
+
+Dump (Backup)
+
+Pass (Fsck check order)
+
+5. Storage Concepts and Quotas
+Swap: Virtual memory on the disk. Know mkswap, swapon, and free -m.
+
+Disk Quotas: Restricting how much space a user can take up. Commands: quota, edquota, and setquota.
+
+RAID: Basic understanding of Software RAID (using mdadm).
+
+RAID 0: Striping (Fast, no redundancy).
+
+RAID 1: Mirroring (Redundant).
+
+RAID 5/6/10: Balance of speed and redundancy.
 
 ## GRUB2 (Grand Unified Bootloader)
 GRUB2 is the industry standard bootloader. You need to know how to navigate and configure it.
