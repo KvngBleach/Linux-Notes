@@ -460,6 +460,43 @@ ss -	(Socket Statistics) Replaces netstat. Shows open ports and active connectio
 tcpdump -	A packet sniffer. Used for deep-dive analysis of what is actually hitting the wire.
 nslookup - 	A legacy tool for DNS queries (prefer dig for the exam).
 
+Section 1.4: Given a scenario, configure and manage storage.
+This domain covers everything from the physical (or virtual) disk to the logical way data is structured. Here are the core components you’ll need to master:
+
+### 1. Partitioning & Disk Layout
+You need to know how to prep a disk for use. This involves understanding the two main partitioning standards:
+
+* MBR (Master Boot Record): The legacy standard; supports up to 4 primary partitions and 2TB disks.
+* GPT (GUID Partition Table): The modern standard; supports much larger disks and almost unlimited partitions.
+* Tools: You should be comfortable using fdisk, gdisk, and parted.
+
+### 3. Filesystem Types & Creation
+Once partitioned, you have to "format" the drive. The exam focuses on:
+
+* ext4: The reliable, journaling standard for most Linux distros.
+* XFS: High-performance, default for RHEL/CentOS; great for large files.
+* Btrfs: The "copy-on-write" filesystem with built-in snapshotting capabilities.
+* NFS/SMB: Network-based storage protocols.
+* Key commands: mkfs, tune2fs, mount.
+
+### 4. Mounting & Persistence
+Learning how to attach these filesystems to the directory tree is critical.
+
+* /etc/fstab: You must know how to edit this file to ensure drives mount automatically at boot without breaking the system.
+
+* Mount Options: Understand flags like ro (read-only), noexec (prevent binaries from running), and nodev.
+
+### 5. Storage Health & Monitoring
+As a Linux admin, you need to know when a disk is filling up or failing.
+
+* df -h: Check disk space.
+
+* du -sh: Check directory usage.
+
+* lsblk: View the block device hierarchy.
+
+* fsck: Check and repair filesystem errors.
+
 # 1.5
 
 ## Localization (Locales) 
@@ -539,6 +576,15 @@ Enable NTP- set-ntp true- N/A
 Change Keyboard- N/A- set-x11-keymap [layout]
 
 # 1.6
+
+## 1. Monitoring System Activity
+To manage resources, you first have to see them. You need to be fluent in tools that provide real-time and historical data on CPU, Memory, and I/O usage.
+
+* top / htop: The standard interactive monitors. You should know how to sort by CPU vs. Memory usage within these tools.
+* ps (Process Status): Knowing the difference between ps aux (BSD style) and ps -ef (Standard style) to view running processes.
+* uptime: A quick way to check the "Load Average" over 1, 5, and 15 minutes.
+* free: Specifically for checking RAM and Swap utilization.
+* iostat / sar: Part of the sysstat package, used for monitoring disk input/output performance.
 
 ## Package Management (The Big Three)
 
