@@ -217,164 +217,119 @@ This section moves beyond local users to how Linux fits into a larger corporate 
 ## 3.2 Configure and maintain firewalls.
 You are expected to know the "Big Three" of Linux firewalls. CompTIA tests your ability to translate a business requirement (e.g., "block all traffic except web") into specific commands.
 
-Firewalld: Managing Zones, services, and runtime vs. permanent configurations.
-
-UFW (Uncomplicated Firewall): Common in Ubuntu/Debian; simple syntax for allow/deny rules.
-
-nftables/iptables: Understanding the underlying framework (chains, tables, and rules) and how nft is replacing iptables.
+* Firewalld: Managing Zones, services, and runtime vs. permanent configurations.
+* UFW (Uncomplicated Firewall): Common in Ubuntu/Debian; simple syntax for allow/deny rules.
+* nftables/iptables: Understanding the underlying framework (chains, tables, and rules) and how nft is replacing iptables.
 
 ## 3.3 Implement OS hardening techniques.
 Hardening is about reducing the "attack surface." This is a high-yield area for Performance-Based Questions (PBQs).
 
-SSH Hardening: Disabling root login, enforcing key-based authentication, and changing default ports.
-
-Service Hardening: Disabling unused services and protocols (Telnet, FTP, etc.).
-
-Sudoers: Managing /etc/sudoers via visudo and applying the Principle of Least Privilege.
-
-Banner/MOTD: Setting up legal warning banners and Message of the Day.
-
-Shell Restrictions: Implementing restricted shells for specific users.
+* SSH Hardening: Disabling root login, enforcing key-based authentication, and changing default ports.
+* Service Hardening: Disabling unused services and protocols (Telnet, FTP, etc.).
+* Sudoers: Managing /etc/sudoers via visudo and applying the Principle of Least Privilege.
+* Banner/MOTD: Setting up legal warning banners and Message of the Day.
+* Shell Restrictions: Implementing restricted shells for specific users.
 
 ## 3.4 Implement Mandatory Access Control (MAC).
 You don't need to be a developer, but you must know how to troubleshoot and manage the two main MAC systems.
 
-SELinux (Security-Enhanced Linux): * Modes: Enforcing, Permissive, Disabled.
-
-Tools: getenforce, setenforce, sestatus, and restorecon.
-
-Contexts: Identifying and fixing incorrect security contexts on files.
-
-AppArmor: Using aa-status, aa-complain, and aa-enforce.
+* SELinux (Security-Enhanced Linux): * Modes: Enforcing, Permissive, Disabled.
+* Tools: getenforce, setenforce, sestatus, and restorecon.
+* Contexts: Identifying and fixing incorrect security contexts on files.
+* AppArmor: Using aa-status, aa-complain, and aa-enforce.
 
 ## 3.5 Summarize cryptography and compliance concepts.
 This is the "theory and standards" portion of the domain.
 
-Encryption at Rest: Understanding LUKS (Linux Unified Key Setup) and dm-crypt.
-
-Encryption in Transit: Managing SSL/TLS certificates and using OpenSSL for basic tasks (generating CSRs, etc.).
-
-Hashing: Using sha256sum or md5sum for file integrity checks.
-
-Vulnerability Management: Monitoring CVEs (Common Vulnerabilities and Exposures) and using scanners like OpenSCAP.
+* Encryption at Rest: Understanding LUKS (Linux Unified Key Setup) and dm-crypt.
+* Encryption in Transit: Managing SSL/TLS certificates and using OpenSSL for basic tasks (generating CSRs, etc.).
+* Hashing: Using sha256sum or md5sum for file integrity checks.
+* Vulnerability Management: Monitoring CVEs (Common Vulnerabilities and Exposures) and using scanners like OpenSCAP.
 
 ## 4.1 Create simple shell scripts to automate common tasks.
 This is the core "classic" scripting section. You need to be able to read, write, and troubleshoot Bash scripts.
 
-Variables & Scope: Working with environment variables vs. local variables and positional parameters (e.g., $1, $2, $@).
-
-Control Statements: Using if/then/else, case statements, and loops (for, while, until).
-
-Logic & Comparison: Understanding exit codes ($?), logical operators (&&, ||), and bracket syntax for comparisons ([ ] vs [[ ]]).
-
-Text Processing: Using grep, sed, awk, cut, and sort within scripts to parse logs or configuration files.
+* Variables & Scope: Working with environment variables vs. local variables and positional parameters (e.g., $1, $2, $@).
+* Control Statements: Using if/then/else, case statements, and loops (for, while, until).
+* Logic & Comparison: Understanding exit codes ($?), logical operators (&&, ||), and bracket syntax for comparisons ([ ] vs [[ ]]).
+* Text Processing: Using grep, sed, awk, cut, and sort within scripts to parse logs or configuration files.
 
 ## 4.2 Perform basic Python scripting.
 New to V8. You aren't expected to be a full-stack developer, but you must understand Python's role in system automation.
 
-Python Fundamentals: Basic syntax, data types (strings, lists, dictionaries), and indentation rules.
-
-Execution: Running scripts with python3, using the shebang (#!/usr/bin/python3), and managing virtual environments (venv).
-
-Built-in Modules: Familiarity with modules like os, sys, and subprocess for interacting with the Linux system.
-
-Best Practices: Following PEP 8 style guidelines and basic error handling (try/except).
+* Python Fundamentals: Basic syntax, data types (strings, lists, dictionaries), and indentation rules.
+* Execution: Running scripts with python3, using the shebang (#!/usr/bin/python3), and managing virtual environments (venv).
+* Built-in Modules: Familiarity with modules like os, sys, and subprocess for interacting with the Linux system.
+* Best Practices: Following PEP 8 style guidelines and basic error handling (try/except).
 
 ## 4.3 Perform basic version control using Git.
 New to V8. The exam assumes you are storing your scripts and configuration files in a repository.
 
-Workflow: Understanding the lifecycle: git init → git add → git commit → git push.
-
-Branching: Creating and merging branches (git branch, git merge, git checkout).
-
-Collaboration: Cloning repositories (git clone) and pulling updates (git pull).
-
-Management: Using .gitignore to keep secrets/temp files out of the repo and using git log to view history.
+* Workflow: Understanding the lifecycle: git init → git add → git commit → git push.
+* Branching: Creating and merging branches (git branch, git merge, git checkout).
+* Collaboration: Cloning repositories (git clone) and pulling updates (git pull).
+* Management: Using .gitignore to keep secrets/temp files out of the repo and using git log to view history.
 
 ## 4.4 Summarize orchestration and Infrastructure as Code (IaC) concepts.
 This is primarily conceptual, though you should recognize the syntax of common tools.
 
-Configuration Management: Understanding the "push vs. pull" models and identifying tools like Ansible (YAML-based, agentless), Puppet, and Chef.
-
-Provisioning Tools: The role of Terraform or OpenTofu in managing cloud resources.
-
-CI/CD Pipelines: Understanding how automated testing and deployment work in a Linux environment.
-
-Orchestration: Basic concepts of Kubernetes and Docker Swarm for managing containerized applications.
+* Configuration Management: Understanding the "push vs. pull" models and identifying tools like Ansible (YAML-based, agentless), Puppet, and Chef.
+* Provisioning Tools: The role of Terraform or OpenTofu in managing cloud resources.
+* CI/CD Pipelines: Understanding how automated testing and deployment work in a Linux environment.
+* Orchestration: Basic concepts of Kubernetes and Docker Swarm for managing containerized applications.
 
 ## 4.5 Summarize AI-related best practices.
 New to V8. This objective reflects the rise of AI in IT.
 
-Code Generation: Using AI to draft scripts while emphasizing the need for manual verification (never "blindly" copy-pasting).
-
-Prompt Engineering: How to write effective prompts to troubleshoot Linux errors or generate configuration templates.
-
-Security & Ethics: Awareness of leaking proprietary data or secrets (like API keys) into public AI models.
+* Code Generation: Using AI to draft scripts while emphasizing the need for manual verification (never "blindly" copy-pasting).
+* Prompt Engineering: How to write effective prompts to troubleshoot Linux errors or generate configuration templates.
+* Security & Ethics: Awareness of leaking proprietary data or secrets (like API keys) into public AI models.
 
 ## 5.1 Analyze system properties and processes to troubleshoot issues.
 This objective covers the "health check" phase. You need to know which tools reveal the source of a slowdown or crash.
 
-System Monitoring: Using top, htop, vmstat, and sar to identify resource hogs.
-
-Log Analysis: Proficiency with journalctl (systemd logs) and viewing traditional logs in /var/log/ (e.g., messages, secure, dmesg).
-
-Process Management: Identifying zombie processes, hanging tasks, and using kill, pkill, or nice/renice to manage priorities.
-
-Hardware Detection: Using lsusb, lspci, and lscpu to verify that the OS "sees" the hardware.
+* System Monitoring: Using top, htop, vmstat, and sar to identify resource hogs.
+* Log Analysis: Proficiency with journalctl (systemd logs) and viewing traditional logs in /var/log/ (e.g., messages, secure, dmesg).
+* Process Management: Identifying zombie processes, hanging tasks, and using kill, pkill, or nice/renice to manage priorities.
+* Hardware Detection: Using lsusb, lspci, and lscpu to verify that the OS "sees" the hardware.
 
 ## 5.2 Troubleshoot user, service, and application issues.
 This is the "break/fix" section for software and access.
 
-Permissions & Ownership: Diagnosing Permission Denied errors. You must know how to trace these to chmod, chown, or umask settings.
-
-Service Failures: Using systemctl status to find why a service failed to start and checking dependency loops.
-
-Authentication: Troubleshooting SSH keys, sudo access (the /etc/sudoers file), and account lockouts.
-
-Library Dependencies: Using ldd to find missing shared libraries that prevent an application from launching.
+* Permissions & Ownership: Diagnosing Permission Denied errors. You must know how to trace these to chmod, chown, or umask settings.
+* Service Failures: Using systemctl status to find why a service failed to start and checking dependency loops.
+* Authentication: Troubleshooting SSH keys, sudo access (the /etc/sudoers file), and account lockouts.
+* Library Dependencies: Using ldd to find missing shared libraries that prevent an application from launching.
 
 ## 5.3 Troubleshoot storage and boot issues.
 This section is critical because a storage failure often means a system won't boot at all.
 
-Boot Failures: Diagnosing GRUB errors, "Kernel Panics," and problems with the Initramfs.
-
-Drive Health: Using smartctl for hardware health and fsck to repair corrupted filesystems.
-
-Mounting Issues: Troubleshooting the /etc/fstab file (e.g., a system failing to boot because a non-critical drive is missing).
-
-Capacity Issues: Detecting "Disk Full" errors using df -h and du, and specifically checking for inode exhaustion (df -i).
+* Boot Failures: Diagnosing GRUB errors, "Kernel Panics," and problems with the Initramfs.
+* Drive Health: Using smartctl for hardware health and fsck to repair corrupted filesystems.
+* Mounting Issues: Troubleshooting the /etc/fstab file (e.g., a system failing to boot because a non-critical drive is missing).
+* Capacity Issues: Detecting "Disk Full" errors using df -h and du, and specifically checking for inode exhaustion (df -i).
 
 ## 5.4 Troubleshoot network and security issues.
 Networking is often the most complex part of troubleshooting due to the layers involved.
 
-Connectivity: Moving up the stack from ping (ICMP) to traceroute (routing) to dig/nslookup (DNS).
-
-Port & Interface Issues: Using ss or netstat to see if a service is actually listening on a port, and ip addr to check interface states.
-
-Firewall Denials: Identifying if iptables, nftables, or firewalld is silently dropping traffic.
-
-Security Contexts: SELinux and AppArmor are high-priority. You must know how to check if a "denial" is caused by a security policy (e.g., getenforce, sestatus).
+* Connectivity: Moving up the stack from ping (ICMP) to traceroute (routing) to dig/nslookup (DNS).
+* Port & Interface Issues: Using ss or netstat to see if a service is actually listening on a port, and ip addr to check interface states.
+* Firewall Denials: Identifying if iptables, nftables, or firewalld is silently dropping traffic.
+* Security Contexts: SELinux and AppArmor are high-priority. You must know how to check if a "denial" is caused by a security policy (e.g., getenforce, sestatus).
 
 ## 5.5 Summarize performance optimization concepts.
 This is about proactive tuning rather than reactive fixing.
 
-Kernel Tuning: Understanding /proc/sys and the sysctl command to modify kernel parameters on the fly.
-
-Storage Optimization: Identifying I/O wait times and choosing the right scheduler or swap space configuration.
-
-Network Tuning: Adjusting MTU sizes and buffer settings for high-latency or high-bandwidth environments.
+* Kernel Tuning: Understanding /proc/sys and the sysctl command to modify kernel parameters on the fly.
+* Storage Optimization: Identifying I/O wait times and choosing the right scheduler or swap space configuration.
+* Network Tuning: Adjusting MTU sizes and buffer settings for high-latency or high-bandwidth environments.
 
 The Troubleshooting Methodology
 CompTIA expects you to follow their specific 6-step troubleshooting process in scenario questions:
 
-Identify the problem (Ask the user, check logs).
-
-Establish a theory of probable cause.
-
-Test the theory to determine the cause.
-
-Establish a plan of action and implement the solution.
-
-Verify full system functionality (and implement preventive measures).
-
-Document findings, actions, and outcomes.
+* Identify the problem (Ask the user, check logs).
+* Establish a theory of probable cause.
+* Test the theory to determine the cause.
+* Establish a plan of action and implement the solution.
+* Verify full system functionality (and implement preventive measures).
+* Document findings, actions, and outcomes.
