@@ -333,3 +333,36 @@ CompTIA expects you to follow their specific 6-step troubleshooting process in s
 * Establish a plan of action and implement the solution.
 * Verify full system functionality (and implement preventive measures).
 * Document findings, actions, and outcomes.
+
+# Domain 1 Keywords
+
+* BIOS/UEFI: The firmware interfaces that initialize hardware. UEFI is the modern standard, supporting larger disks and Secure Boot.
+* GRUB2 (Grand Unified Bootloader): The primary bootloader for most Linux distros. It allows you to select kernels or edit boot parameters (like entering single-user mode).
+* initramfs (Initial RAM Filesystem): A temporary file system loaded into RAM that contains the drivers and tools needed to mount the real root file system.
+* systemd: The modern init system and service manager (PID 1). It uses units (like .service or .target) to manage the system state.
+* Targets: systemd’s version of runlevels (e.g., multi-user.target for command line, graphical.target for desktop).
+* Kernel Module: A piece of code (often a driver) that can be loaded into or unloaded from the kernel on the fly using insmod, rmmod, or modprobe.
+* MBR vs. GPT: Partitioning schemes. MBR is legacy (4 primary partitions, 2TB limit); GPT is modern (128 partitions, virtually no size limit).
+* LVM (Logical Volume Management): A layer of abstraction over physical disks.
+* PV (Physical Volume): The actual disk or partition.
+* VG (Volume Group): A pool created from one or more PVs.
+* LV (Logical Volume): The "virtual partition" you format and mount.
+* RAID (Redundant Array of Independent Disks): * RAID 0: Striping (Performance, no redundancy).
+* RAID 1: Mirroring (Redundancy).
+* RAID 5/6: Striping with Parity (Balance of speed and safety).
+* VFS (Virtual File System): The kernel layer that allows Linux to support many different filesystem types (Ext4, XFS, Btrfs) using the same commands.
+* Swap: A dedicated area on disk used as "overflow" RAM when physical memory is full.
+* NetworkManager: The daemon that manages network connections. Controlled via nmcli (command line) or nmtui (text UI).
+* iproute2: The modern collection of networking utilities (the ip command) that replaces the old ifconfig.
+* DNS (Domain Name System): Resolves hostnames to IPs. Key files include /etc/resolv.conf (nameservers) and /etc/hosts (local overrides).
+* DHCP: Automatically assigns IP addresses.
+* SSH (Secure Shell): The standard for encrypted remote management.
+* Repository: A central server containing software packages and metadata.
+* DNF/YUM: Package managers for RHEL/Fedora-based systems.
+* APT: Package manager for Debian/Ubuntu-based systems.
+* Shared Libraries: Files (ending in .so) that contain code multiple programs can use simultaneously. Managed/linked via ldconfig.
+* lsblk: List block devices (disks).
+* df -h: Show human-readable disk space usage.
+* dmesg: View kernel ring buffer messages (great for hardware troubleshooting).
+* systemctl: The Swiss Army knife for managing systemd services.
+* modprobe: The smart way to add/remove kernel modules (handles dependencies).
