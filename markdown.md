@@ -35,33 +35,25 @@ Mounting: Persistent mounting via /etc/fstab. You must understand the fields (UU
 ## 1.4 Configure and Manage Network Settings
 The exam has moved almost entirely to the iproute2 suite and NetworkManager.
 
-Manual Config: Using ip addr, ip link, and ip route.
-
-NetworkManager: Mastering nmcli (command line) and nmtui (text UI).
-
-Hostname/DNS: Configuring /etc/hostname, /etc/hosts, and /etc/resolv.conf.
-
-Troubleshooting Tools: dig and nslookup for DNS; ping, traceroute, and mtr for connectivity.
+* Manual Config: Using ip addr, ip link, and ip route.
+* NetworkManager: Mastering nmcli (command line) and nmtui (text UI).
+* Hostname/DNS: Configuring /etc/hostname, /etc/hosts, and /etc/resolv.conf.
+* Troubleshooting Tools: dig and nslookup for DNS; ping, traceroute, and mtr for connectivity.
 
 ## 1.5 Configure and Manage Hardware and Kernel
 Understanding the bridge between the software and the physical (or virtual) machine.
 
-Kernel Modules: Using lsmod (list), modprobe (smart insert/remove), and modinfo.
-
-Hardware Discovery: lsusb, lspci, and lscpu.
-
-Monitoring: Checking the "kernel ring buffer" via dmesg to find hardware errors or driver failures.
+* Kernel Modules: Using lsmod (list), modprobe (smart insert/remove), and modinfo.
+* Hardware Discovery: lsusb, lspci, and lscpu.
+* Monitoring: Checking the "kernel ring buffer" via dmesg to find hardware errors or driver failures.
 
 The "v8" Performance Focus
 A common PBQ for Domain 1 involves LVM Expansion. They might give you a server running out of space and a new raw disk. Your workflow would be:
 
-pvcreate the new disk.
-
-vgextend the existing group.
-
-lvextend the logical volume.
-
-resize2fs (for ext4) or xfs_growfs (for XFS) to actually use the space.
+* pvcreate the new disk.
+* vgextend the existing group.
+* lvextend the logical volume.
+* resize2fs (for ext4) or xfs_growfs (for XFS) to actually use the space.
 
 ### Step 1: Initialize Physical Volumes (PV)
 Tell Linux to treat raw disks/partitions as LVM-ready.
