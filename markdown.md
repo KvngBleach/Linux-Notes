@@ -366,3 +366,175 @@ CompTIA expects you to follow their specific 6-step troubleshooting process in s
 * dmesg: View kernel ring buffer messages (great for hardware troubleshooting).
 * systemctl: The Swiss Army knife for managing systemd services.
 * modprobe: The smart way to add/remove kernel modules (handles dependencies).
+# Doamin 2 Keywords
+
+UID / GID: User ID and Group ID. Linux identifies users and groups by these numbers, not their names. Root is always 0.
+
+/etc/passwd: The text file containing user account information (username, UID, GID, home directory, and shell).
+
+/etc/shadow: The secure file containing encrypted user passwords and account expiration details.
+
+/etc/group: The file defining group memberships.
+
+visudo: The command used to safely edit the /etc/sudoers file. It checks for syntax errors before saving, preventing you from being locked out of admin access.
+
+Skeleton Directory (/etc/skel): A template directory. Files placed here are automatically copied to a new user's home directory when the account is created.
+
+PAM (Pluggable Authentication Modules): A flexible mechanism for authenticating users. It allows admins to change authentication methods (like moving from passwords to biometrics) without rewriting software.
+
+## 2. Text Processing and Editing
+Vim / Nano: The standard text editors. You must know how to navigate, edit, and save in Vim for the performance-based questions.
+
+Standard Streams:
+
+stdin (0): Standard Input.
+
+stdout (1): Standard Output.
+
+stderr (2): Standard Error.
+
+Piping (|): Sending the output of one command to the input of another.
+
+Regex (Regular Expressions): Patterns used for searching and manipulating text (e.g., ^ for start of line, $ for end of line).
+
+grep / sed / awk: The "Holy Trinity" of text processing.
+
+grep: Search for patterns.
+
+sed: Stream Editor (find and replace).
+
+awk: Pattern scanning and processing (great for columns/delimited data).
+
+## 3. System Services
+Unit File: A configuration file used by systemd to define a service, mount point, or device.
+
+Daemon: A background process that runs constantly to handle specific requests (e.g., sshd for SSH, httpd for web).
+
+systemctl: The primary tool for controlling services (start, stop, enable, disable).
+
+journalctl: The tool used to query and display logs from the systemd journal.
+
+Runlevels / Targets: The state the system is in.
+
+multi-user.target: Standard server mode (no GUI).
+
+graphical.target: Desktop mode with a GUI.
+
+## 4. Container Operations (The v8 Focus)
+Container Engine: The software that manages containers (e.g., Podman or Docker).
+
+Image: A read-only template used to create a container.
+
+Container: A running, isolated instance of an image.
+
+Dockerfile / Containerfile: A script containing instructions on how to build a container image.
+
+Port Mapping: Linking a port on the host machine to a port inside the container (e.g., mapping host port 8080 to container port 80).
+
+Persistent Volume: A way to store container data outside the container’s ephemeral filesystem so it isn't lost when the container stops.
+
+## 5. Localization and Environment
+Environment Variables: Values that affect the behavior of processes (e.g., $PATH, $HOME, $SHELL).
+
+Alias: A shortcut for a long command (e.g., alias ll='ls -la').
+
+Locale: A set of parameters that defines the user's language, country, and any special variant preferences (managed via localectl).
+
+# Domain 4 Keywords
+
+## 1. Bash Scripting Fundamentals
+Shebang (#!): The first line of a script that tells the kernel which interpreter to use (e.g., #!/bin/bash or #!/usr/bin/python3).
+
+Variables: Containers for data. In Bash, they are assigned without spaces (e.g., VAR="value") and accessed with a dollar sign ($VAR).
+
+Exit Code ($?): A number between 0 and 255 returned by a command. 0 always means success; non-zero means an error occurred.
+
+Positional Parameters: Variables used to handle arguments passed to a script (e.g., $0 is the script name, $1 is the first argument).
+
+Conditional Logic: Using if, then, else, and fi to make decisions based on tests (e.g., [ -f file.txt ] checks if a file exists).
+
+Loops: * for: Runs a set number of times (over a list or range).
+
+while: Runs as long as a condition is true.
+
+## 2. Python Scripting (New to v8)
+Indentation: Unlike Bash, Python uses whitespace (tabs or spaces) to define blocks of code. Incorrect indentation causes a script to fail.
+
+Lists & Dictionaries: Python’s primary ways to store data sets.
+
+List: ['server1', 'server2'] (ordered).
+
+Dictionary: {'hostname': 'web01'} (key-value pairs).
+
+Modules: External code libraries. You’ll likely see import os or import sys in scripts that interact with the Linux system.
+
+pip: The standard tool for installing Python packages.
+
+## 3. Version Control (Git)
+Repository (Repo): A directory where Git tracks the history of all file changes.
+
+Commit: A "snapshot" of your code at a specific point in time.
+
+Clone: Copying an existing remote repository to your local machine.
+
+Push/Pull: * Push: Sending your local commits to a remote server (like GitHub).
+
+Pull: Fetching and merging changes from a remote server to your local machine.
+
+.gitignore: A file that tells Git which files or directories to ignore (e.g., passwords or temporary logs).
+
+## 4. Orchestration & Infrastructure as Code (IaC)
+Infrastructure as Code (IaC): Managing and provisioning infrastructure through machine-readable definition files (like YAML) rather than manual configuration.
+
+Ansible: A popular automation tool that is agentless (uses SSH) and uses Playbooks written in YAML.
+
+Idempotency: A key concept in automation; it means that running a script multiple times results in the same state without causing errors or duplicate changes.
+
+YAML / JSON: The two most common data formats used for configuration files in orchestration.
+
+## 5. AI Best Practices
+Prompt Engineering: The practice of refining inputs to an AI to get more accurate scripts or troubleshooting steps.
+
+Code Verification: The requirement to manually review and test any code generated by AI before running it in a production environment.
+
+# Domain 5 Keywords
+
+## 1. System Performance & Process Troubleshooting
+Load Average: A measure of system utilization (CPU and I/O). Found in top or uptime, it shows the number of processes in a runnable or uninterruptible state.
+
+Zombie Process: A process that has completed execution but still has an entry in the process table. It’s "dead" but hasn't been reaped by its parent.
+
+OOM Killer (Out of Memory Killer): A kernel feature that sacrifices a process (usually the one using the most RAM) to prevent the entire system from crashing when memory is exhausted.
+
+dmesg: The kernel ring buffer. This is the first place to look for hardware failures, driver issues, or "segmentation faults."
+
+journalctl: The primary tool for querying the systemd journal. Use -u for a specific service or -p err for error-level messages.
+
+## 2. Storage & Boot Troubleshooting
+Inode Exhaustion: A condition where a disk has plenty of space but cannot create new files because it has run out of inodes (index nodes). Check with df -i.
+
+Kernel Panic: A safety measure taken by the kernel when it encounters a fatal error it cannot recover from. Often caused by failing hardware or a bad driver.
+
+fsck (File System Check): Used to check and repair a Linux file system. Note: Never run this on a mounted filesystem!
+
+GRUB Rescue: The minimal shell you land in if the bootloader cannot find its configuration file or the kernel.
+
+lsof (List Open Files): Used to identify which process is holding a file or directory open (critical when you can't unmount a drive).
+
+## 3. Network & Security Troubleshooting
+DNS Resolution: The process of turning a name into an IP. Use dig or nslookup to troubleshoot /etc/resolv.conf issues.
+
+Latency vs. Throughput: Latency is the delay (measured by ping), while throughput is the volume of data sent over time (measured by iperf).
+
+MTU (Maximum Transmission Unit): The largest packet size a network interface can handle. If this is misconfigured, packets may be dropped or fragmented.
+
+ss (Socket Statistics): The modern replacement for netstat. Used to see which ports are open and which services are listening.
+
+SELinux Contexts: Labels applied to files and processes. If a service has the right permissions but still can't access a file, it's likely an SELinux context mismatch (ls -Z).
+
+## 4. Hardware & User Troubleshooting
+Permission Denied: The most common user error. Troubleshoot by checking UGO (User, Group, Other) permissions, ACLs, or Attribute flags (lsattr).
+
+Shared Library Issues: When a program won't start because it can't find a .so file. Use ldd to map dependencies.
+
+sar (System Activity Reporter): Part of the sysstat package; used for long-term monitoring to find "bottlenecks" that occurred in the past.
