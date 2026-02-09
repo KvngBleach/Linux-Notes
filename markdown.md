@@ -153,77 +153,54 @@ Account Creation: Using useradd (low-level) and adduser (interactive), groupadd,
 
 The "Big Three" Files:
 
-/etc/passwd: User account info (UID, GID, Home Dir, Shell).
-
-/etc/shadow: Encrypted passwords and aging info.
-
-/etc/group: Group definitions.
-
-Password Management: Using passwd and chage to set expiration dates and minimum lengths.
-
-Profiles & Skeletons: Managing /etc/skel to give new users default files (like .bashrc).
+* /etc/passwd: User account info (UID, GID, Home Dir, Shell).
+* /etc/shadow: Encrypted passwords and aging info.
+* /etc/group: Group definitions.
+* Password Management: Using passwd and chage to set expiration dates and minimum lengths.
+* Profiles & Skeletons: Managing /etc/skel to give new users default files (like .bashrc).
 
 ## 2.2 Create and Modify Text Files
 You must be efficient at editing configurations and processing data output.
 
-Editors: Proficiency in vi or vim is almost mandatory for the Performance-Based Questions (PBQs). Know how to save (:wq!) and exit (:q!).
-
-Output Processing: The "Pipeline" tools:
-
-grep (searching strings).
-
-awk and sed (stream editing and field manipulation).
-
-cut, sort, uniq, and wc (word count).
-
-Redirection: Mastering > (overwrite), >> (append), and 2> (redirect errors).
+* Editors: Proficiency in vi or vim is almost mandatory for the Performance-Based Questions (PBQs). Know how to save (:wq!) and exit (:q!).
+* Output Processing: The "Pipeline" tools:
+* grep (searching strings).
+* awk and sed (stream editing and field manipulation).
+* cut, sort, uniq, and wc (word count).
+* Redirection: Mastering > (overwrite), >> (append), and 2> (redirect errors).
 
 ## 2.3 Configure and Manage System Services
 This covers the core background processes that provide functionality to the network.
 
-Service Control: Deep dive into systemd.
-
-systemctl list-units --type=service.
-
-Managing targets (e.g., changing from multi-user.target to graphical.target).
-
-Common Network Services: You don't need to be a web dev, but you must know how to start/stop and locate logs for:
-
-Web: Apache (httpd) / Nginx.
-
-Time: chronyd or ntpd.
-
-SSH: sshd.
-
-Logging: Configuring rsyslog and using logger to test manual log entries.
+* Service Control: Deep dive into systemd.
+* systemctl list-units --type=service.
+* Managing targets (e.g., changing from multi-user.target to graphical.target).
+* Common Network Services: You don't need to be a web dev, but you must know how to start/stop and locate logs for:
+* Web: Apache (httpd) / Nginx.
+* Time: chronyd or ntpd.
+* SSH: sshd.
+* Logging: Configuring rsyslog and using logger to test manual log entries.
 
 ## 2.4 Manage Container Operations
 This is the most "modern" part of Domain 2. CompTIA treats containers as a core admin task now.
 
-Container Engines: Focus on Podman (RHEL-style) and Docker.
+* Container Engines: Focus on Podman (RHEL-style) and Docker.
 
 Essential Commands:
 
-pull: Fetching images from a registry.
-
-run: Starting a container (know flags like -d for detached and -p for port mapping).
-
-ps: Viewing running containers (-a for all).
-
-exec: Running a command inside a running container.
-
-logs: Troubleshooting a failing container.
-
-Container Images: Basic understanding of a Dockerfile (FROM, RUN, EXPOSE, CMD).
+* pull: Fetching images from a registry.
+* run: Starting a container (know flags like -d for detached and -p for port mapping).
+* ps: Viewing running containers (-a for all).
+* exec: Running a command inside a running container.
+* logs: Troubleshooting a failing container.
+* Container Images: Basic understanding of a Dockerfile (FROM, RUN, EXPOSE, CMD).
 
 ## 2.5 Configure and Manage Local and Network Environment Variables
 Ensuring the system "knows" where things are.
 
-Environment Variables: PATH, HOME, USER, and SHELL.
-
-Persistent Variables: Editing ~/.bashrc, ~/.bash_profile, and /etc/profile to make changes stick.
-
-Locales: Using localectl to manage system language and keyboard layouts.
+* Environment Variables: PATH, HOME, USER, and SHELL.
+* Persistent Variables: Editing ~/.bashrc, ~/.bash_profile, and /etc/profile to make changes stick.
+* Locales: Using localectl to manage system language and keyboard layouts.
 
 The "v8" Service Troubleshooting Workflow
 A typical Domain 2 question might look like this:
@@ -232,24 +209,18 @@ A typical Domain 2 question might look like this:
 
 Your v8 Workflow:
 
-Check service status: systemctl status nginx.
-
-Check the port: ss -tulpn | grep 80.
-
-Check the logs: tail -f /var/log/nginx/error.log.
-
-Check the container (if applicable): podman logs [container_id].
+* Check service status: systemctl status nginx.
+* Check the port: ss -tulpn | grep 80.
+* Check the logs: tail -f /var/log/nginx/error.log.
+* Check the container (if applicable): podman logs [container_id].
 
 ## 3.1 Summarize authentication and accounting concepts.
 This section moves beyond local users to how Linux fits into a larger corporate identity ecosystem.
 
-Authentication Frameworks: Understanding PAM (Pluggable Authentication Modules) is critical. You need to know how the /etc/pam.d/ directory works and the four management groups (Account, Authentication, Password, Session).
-
-Identity Management: Integration with LDAP, Active Directory (AD), and Kerberos.
-
-MFA (Multi-Factor Authentication): Knowledge of TOTP (Time-based One-Time Password) and hardware tokens.
-
-Auditing: Using auditd to track system changes and user activity.
+* Authentication Frameworks: Understanding PAM (Pluggable Authentication Modules) is critical. You need to know how the /etc/pam.d/ directory works and the four management groups (Account, Authentication, Password, Session).
+* Identity Management: Integration with LDAP, Active Directory (AD), and Kerberos.
+* MFA (Multi-Factor Authentication): Knowledge of TOTP (Time-based One-Time Password) and hardware tokens.
+* Auditing: Using auditd to track system changes and user activity.
 
 ## 3.2 Configure and maintain firewalls.
 You are expected to know the "Big Three" of Linux firewalls. CompTIA tests your ability to translate a business requirement (e.g., "block all traffic except web") into specific commands.
